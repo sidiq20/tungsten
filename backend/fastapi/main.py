@@ -5,6 +5,7 @@ from contextlib import asynccontextmanager
 from sqlalchemy import text 
 from models.base import engine
 import logging 
+from api.v1.router import api_router
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -45,3 +46,5 @@ async def root():
         "message": "Welcome to Tungsten API",
         "docs": f"{settings.API_V1_STR}/docs"
     }
+
+app.include_router(api_router, prefix=settings.API_V1_STR)

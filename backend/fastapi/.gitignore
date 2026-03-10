@@ -1,3 +1,7 @@
 venv 
 .env
 __pycache__
+alembic
+test_routes.sh
+.venv
+test_api.py

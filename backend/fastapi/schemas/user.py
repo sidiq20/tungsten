@@ -5,26 +5,32 @@ from datetime import datetime
 
 class UserCreate(BaseModel):
     email: EmailStr
-    username: str = Field(..., min_length=3, max_length=50) # Fixed min_length
-    password: str = Field(..., min_length=8)                # Fixed min_length
-    full_name: Optional[str] = None                         # Fixed to full_name
+    username: str = Field(..., min_length=3, max_length=50) 
+    password: str = Field(..., min_length=8) 
+    full_name: Optional[str] = None   
 
 class TokenResponse(BaseModel):
     access_token: str 
     refresh_token: str 
     token_type: str = "bearer"
-    expires_in: int                                         # Fixed = to :
+    expires_in: int     
+
+class UserUpdate(BaseModel):
+    email: Optional[EmailStr] = None
+    username: Optional[str] = Field(None, min_length=3, max_length=50)
+    full_name: Optional[str] = None
+    password: Optional[str] = Field(None, min_length=8)
 
 # schema for frontend 
 class UserResponse(BaseModel):
     id: UUID
     email: EmailStr
     username: str 
-    full_name: Optional[str]                                # Fixed to full_name
+    full_name: Optional[str]   
     reputation_score: int 
     role: str 
     is_verified: bool 
     created_at: datetime 
 
-    class Config:                                           # Fixed 'config' to 'Config'
+    class Config:      
         from_attributes = True

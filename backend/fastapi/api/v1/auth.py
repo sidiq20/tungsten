@@ -8,6 +8,7 @@ from models.user import User
 from schemas.user import UserCreate, UserResponse, TokenResponse
 from core.security import hash_password, verify_password, create_access_token
 from core.limiter import limiter
+from core.audit import log_action
 
 router = APIRouter()
 
@@ -37,6 +38,15 @@ async def register(request: Request, user_data: UserCreate, db: AsyncSession = D
     )
 
     db.add(new_user)
+    await db.flush()
+
+    await log_action(
+        db=db,
+        user_id=new_user.id,
+        action="user_registration",
+        description=f"User registered with email {new_user.email}"
+    )
+
     await db.commit()
     await db.refresh(new_user)
 
@@ -78,6 +88,14 @@ async def login(
         )
     
     access_token = create_access_token(subject=str(user.id))
+
+    await log_action(
+        db=db,
+        user_id=user.id,
+        action="user_login",
+        description="User logged in"
+    )
+    await db.commit()
 
     return {
         "access_token": access_token,

@@ -13,6 +13,7 @@ from models.user import User
 from schemas.post import PostCreate, PostResponse, PostUpdate
 from core.reputation import update_reputation
 from core.limiter import limiter
+from core.audit import log_action
 
 from models.tag import Tag
 from models.course import Course
@@ -62,6 +63,9 @@ async def create_post(
             new_post.tags.append(tag)
 
     db.add(new_post)
+    await db.flush()
+    
+    await log_action(db, current_user.id, "post_created", f"Created post {new_post.id}")
     
     if post_in.status == PostStatus.PUBLISHED:
         await update_reputation(
@@ -197,6 +201,7 @@ async def update_post(
         post.status = post_in.status
         
     db.add(post)
+    await log_action(db, current_user.id, "post_updated", f"Updated post {post.id}")
     await db.commit()
     
     from sqlalchemy.orm import joinedload
@@ -224,6 +229,7 @@ async def delete_post(
         raise HTTPException(status_code=403, detail="Not authorized to delete this post")
     
     await db.delete(post)
+    await log_action(db, current_user.id, "post_deleted", f"Deleted post {post.id}")
     await db.commit()
     return None
 

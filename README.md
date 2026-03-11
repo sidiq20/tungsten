@@ -2,52 +2,39 @@
 
 Tungsten is a modern, enterprise-grade academic knowledge-sharing platform designed for students to share notes, ask questions, and collaborate in real-time.
 
-## 🚀 Technology Stack
+## 🚀 Core Platform Functions
 
-The project follows a high-performance, type-safe architecture:
+The Tungsten platform provides the following core functionalities:
 
-### Frontend
-- **Framework:** [Next.js 14+](file:///c:/Users/dell/Desktop/projects/fastapi/tungsten/tungsten-frontend) (App Router)
-- **Language:** TypeScript
-- **Styling:** TailwindCSS + shadcn/ui
-- **State Management:** Zustand + Apollo Client (GraphQL)
+### 1. User Management & Authentication (FastAPI)
+- **Registration & Login**: Secure user authentication using JWT tokens.
+- **Profile Management**: Users can update their profiles, manage privacy settings, and track their reputation score.
+- **Role-Based Access**: Separation of standard users and administrators with elevated privileges.
 
-### Backend (Hybrid Architecture)
-- **FastAPI (Python):** Handles core RESTful API services, authentication, and heavy data management. Located in [backend/fastapi](file:///c:/Users/dell/Desktop/projects/fastapi/tungsten/backend/fastapi).
-- **NestJS (Node.js/TypeScript):** Powers real-time features, GraphQL subscriptions, and background workers. Located in [backend/tungsten](file:///c:/Users/dell/Desktop/projects/fastapi/tungsten/backend/tungsten).
+### 2. Course & Content Organization (FastAPI)
+- **Course Catalog**: Administrators can create and manage academic courses (e.g., "Intro to Computer Science").
+- **Course Subscriptions**: Users can subscribe to specific courses to tailor their content feed.
+- **Tags & Categorization**: Content can be tagged for precise categorization and easy discovery.
 
-### Data & Infrastructure
-- **Database:** PostgreSQL (Neon)
-- **Cache & Message Queue:** Redis
-- **Storage:** Cloudflare R2 (S3-compatible)
-- **ORM:** SQLAlchemy 2.0 (Python) & Prisma (Node.js)
+### 3. Study Materials (Notes) Sharing (FastAPI & Cloudflare R2)
+- **File Uploads**: Users can upload study materials (PDFs, Images) securely via short-lived presigned URLs.
+- **Note Publishing**: Uploaded files can be published as "Notes" linked to specific courses and tags.
+- **Bookmarking**: Users can save valuable notes to their personal bookmarks for quick access later.
 
-## 📁 Project Structure
+### 4. Interactive Q&A and Discussions (FastAPI & NestJS)
+- **Questions & Answers**: Users can post academic questions and provide answers (Note: handled conceptually as 'Posts' in the core architecture).
+- **Nested Comments (NestJS)**: Real-time, deeply nested comment threads on notes and questions powered by GraphQL.
+- **Voting System (FastAPI)**: A reputation-driven upvote/downvote system for notes and comments to surface the best quality answers.
 
-```text
-tungsten/
-├── backend/
-│   ├── fastapi/          # Python Core API (REST)
-│   └── tungsten/         # NestJS Real-time/GraphQL (Node.js)
-├── tungsten-frontend/    # Next.js Web Frontend
-└── project_overview/     # Architecture documentation & PDFs
-```
+### 5. Real-Time Engagement (NestJS)
+- **Live Notifications**: Users receive instant WebSocket notifications for replies, mentions, and votes on their content.
+- **Leaderboards**: Dynamic tracking of the most helpful students based on their earned reputation scores.
 
-## 🛠️ Quick Start
+### 6. Moderation & Administration (FastAPI)
+- **Content Reporting**: Users can report inappropriate content or spam.
+- **Admin Dashboard Actions**: Administrators can review reports, delete violating content, and ban/unban malicious users.
+- **Audit Logging**: A comprehensive internal tracking system recording significant events (logins, deletions, reputation changes) for system security and integrity.
 
-### Prerequisites
-- Python 3.11+
-- Node.js 18+
-- PostgreSQL (Neon recommended)
-- Redis
+---
 
-### Global Installation
-1. Clone the repository.
-2. Follow the setup guides in each sub-directory:
-   - [FastAPI Setup](file:///c:/Users/dell/Desktop/projects/fastapi/tungsten/backend/fastapi/README.md)
-   - [NestJS Setup](file:///c:/Users/dell/Desktop/projects/fastapi/tungsten/backend/tungsten/README.md)
-   - [Frontend Setup](file:///c:/Users/dell/Desktop/projects/fastapi/tungsten/tungsten-frontend/README.md)
-
-## 📦 Infrastructure Configuration
-
-For detailed information on configuring Cloudflare R2 storage, refer to the [Cloudflare R2 Guide](file:///c:/Users/dell/Desktop/projects/fastapi/tungsten/CLOUDFLARE_R2_GUIDE.md).
+> **Note for Frontend Developers:** A comprehensive, detailed breakdown of how to integrate with each of these backend functions is available in [`project_overview/frontend_setup.md`](./project_overview/frontend_setup.md).

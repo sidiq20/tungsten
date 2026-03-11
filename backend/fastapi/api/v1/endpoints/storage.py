@@ -2,7 +2,9 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel
 from typing import Optional
 from core.s3 import s3_storage
-from api.dependencies import get_current_user
+from api.dependencies import get_current_user, get_redis
+from redis.asyncio import Redis
+import json
 
 router = APIRouter()
 
@@ -20,9 +22,9 @@ class PresignedUrlResponse(BaseModel):
 @router.post("/presigned-url", response_model=PresignedUrlResponse)
 async def get_presigned_url(
     request: PresignedUrlRequest,
-    current_user = Depends(get_current_user)
+    current_user = Depends(get_current_user),
+    redis: Redis = Depends(get_redis)
 ):
-    # Generate a unique file key
     import uuid
     import os
     file_ext = os.path.splitext(request.filename)[1]
@@ -35,6 +37,16 @@ async def get_presigned_url(
             expires_in=request.expires_in
         )
         public_url = await s3_storage.get_public_url(file_key)
+        
+        # Store pending upload in Redis
+        await redis.setex(
+            f"pending_upload:{file_key}",
+            request.expires_in or 300,
+            json.dumps({
+                'user_id': str(current_user.id),
+                'content_type': request.content_type
+            })
+        )
         
         return PresignedUrlResponse(
             upload_url=upload_url,

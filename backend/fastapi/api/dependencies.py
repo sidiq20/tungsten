@@ -8,6 +8,10 @@ from models.base import AsyncSessionLocal
 from models.user import User
 from models.admin import Admin
 from core.config import settings
+from core.redis import get_redis_client
+
+async def get_redis():
+    return await get_redis_client()
 
 async def get_db() -> AsyncGenerator[AsyncSession, None]:
     async with AsyncSessionLocal() as session:
@@ -76,9 +80,6 @@ async def get_course_moderator(
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db)
 ) -> User:
-    """
-    Allow admins OR users with reputation >= 500 to manage courses.
-    """
     if current_user.role == "admin" or current_user.reputation_score >= 500:
         return current_user
         

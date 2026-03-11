@@ -15,9 +15,8 @@ async def create_report(
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db)
 ):
-    """
-    Submit a new report on content (Post, User, etc.).
-    """
+
+
     new_report = Report(
         reporter_id=current_user.id,
         target_type=report_in.target_type,

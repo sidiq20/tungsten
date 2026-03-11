@@ -5,7 +5,6 @@ import uuid
 
 from .base import Base
 
-# Association table for Note-Tag relationship
 note_tags = Table(
     "note_tags",
     Base.metadata,

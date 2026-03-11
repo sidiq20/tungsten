@@ -10,9 +10,9 @@ class Vote(Base):
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     user_id = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
-    target_type = Column(String(50), nullable=False)  # "post", "comment", etc.
+    target_type = Column(String(50), nullable=False) 
     target_id = Column(UUID(as_uuid=True), nullable=False)
-    value = Column(Integer, nullable=False)  # 1 for upvote, -1 for downvote
+    value = Column(Integer, nullable=False) 
     created_at = Column(DateTime, default=datetime.utcnow)
 
     __table_args__ = (

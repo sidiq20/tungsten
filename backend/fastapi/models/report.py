@@ -16,7 +16,9 @@ class Report(Base):
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     reporter_id = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
-    target_type = Column(String(50), nullable=False)  # e.g., "post", "user", "comment"
+    target_type = Column(String(50), nullable=False)  
+
+    
     target_id = Column(UUID(as_uuid=True), nullable=False)
     reason = Column(String(255), nullable=False)
     status = Column(String(20), default=ReportStatus.PENDING)

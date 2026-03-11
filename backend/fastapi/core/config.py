@@ -6,13 +6,14 @@ class Settings(BaseSettings):
     VERSION: str = "1.0.0"
     API_V1_STR: str = "/api/v1"
     
+
     # Do OT use os.getenv() here. Pydantic will read these from the .env file automatically.
     DATABASE_URL: str
+    REDIS_URL: str
     JWT_SECRET_KEY: str
     JWT_ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 15
     
-    # Cloudflare R2 / S3 Configuration
     S3_BUCKET: str
     S3_ACCESS_KEY: str
     S3_SECRET_KEY: str

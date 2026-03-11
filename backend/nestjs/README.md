@@ -27,7 +27,6 @@ REDIS_URL="redis://localhost:6379"
 
 ### 3. Running the Server
 ```bash
-npm run start:dev
 ```
 The NestJS server will be available at `http://localhost:3000`.
 

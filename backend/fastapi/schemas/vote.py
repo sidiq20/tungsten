@@ -4,9 +4,9 @@ from uuid import UUID
 from datetime import datetime
 
 class VoteToggle(BaseModel):
-    target_type: str  # "post", "comment", etc.
+    target_type: str  
     target_id: UUID4
-    value: int  # 1 or -1
+    value: int  
 
 class VoteResponse(BaseModel):
     target_id: UUID4

@@ -19,9 +19,6 @@ router = APIRouter()
 async def read_user_me(
     current_user: User = Depends(get_current_user)
 ):
-    """
-    Get current user profile.
-    """
     return current_user
 
 @router.patch("/me", response_model=UserResponse)
@@ -30,11 +27,7 @@ async def update_user_me(
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db)
 ):
-    """
-    Update current user profile.
-    """
     if user_in.email is not None:
-        # Check if email is already taken by another user with the same role
         result = await db.execute(
             select(User).where(
                 (User.email == user_in.email) & 
@@ -50,7 +43,6 @@ async def update_user_me(
         current_user.email = user_in.email
 
     if user_in.username is not None:
-        # Check if username is already taken
         result = await db.execute(
             select(User).where(
                 (User.username == user_in.username) & 
@@ -80,8 +72,6 @@ async def read_bookmarked_posts(
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db)
 ):
-    """Get list of posts bookmarked by current user."""
-    # We use selectinload to avoid lazy loading issues
     result = await db.execute(
         select(User)
         .options(selectinload(User.bookmarked_posts).selectinload(Post.tags))
@@ -96,7 +86,6 @@ async def read_subscribed_courses(
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db)
 ):
-    """Get list of courses subscribed by current user."""
     result = await db.execute(
         select(User)
         .options(selectinload(User.subscribed_courses))

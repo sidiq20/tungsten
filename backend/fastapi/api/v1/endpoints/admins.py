@@ -26,7 +26,6 @@ async def read_users(
     current_admin: Admin = Depends(get_current_admin),
     db: AsyncSession = Depends(get_db)
 ):
-    """List all users (Admin only)."""
     result = await db.execute(select(User).offset(skip).limit(limit))
     return result.scalars().all()
 
@@ -36,14 +35,12 @@ async def ban_user(
     current_admin: Admin = Depends(get_current_admin),
     db: AsyncSession = Depends(get_db)
 ):
-    """Ban a user (Admin only)."""
     user = await db.get(User, user_id)
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
     
     user.is_banned = True
     
-    # Log the action
     audit_log = AuditLog(
         user_id=current_admin.user_id,
         action="user_ban",
@@ -61,14 +58,12 @@ async def unban_user(
     current_admin: Admin = Depends(get_current_admin),
     db: AsyncSession = Depends(get_db)
 ):
-    """Unban a user (Admin only)."""
     user = await db.get(User, user_id)
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
     
     user.is_banned = False
     
-    # Log the action
     audit_log = AuditLog(
         user_id=current_admin.user_id,
         action="user_unban",
@@ -87,7 +82,6 @@ async def read_reports(
     current_admin: User = Depends(get_current_admin),
     db: AsyncSession = Depends(get_db)
 ):
-    """List all reports (Admin only)."""
     result = await db.execute(select(Report).offset(skip).limit(limit))
     return result.scalars().all()
 
@@ -98,7 +92,6 @@ async def resolve_report(
     current_admin: Admin = Depends(get_current_admin),
     db: AsyncSession = Depends(get_db)
 ):
-    """Resolve or dismiss a report (Admin only)."""
     report = await db.get(Report, report_id)
     if not report:
         raise HTTPException(status_code=404, detail="Report not found")
@@ -119,7 +112,6 @@ async def delete_content(
     current_admin: User = Depends(get_current_admin),
     db: AsyncSession = Depends(get_db)
 ):
-    """Force delete any content (Admin only)."""
     if target_type == "post":
         content = await db.get(Post, target_id)
     else:
@@ -130,7 +122,6 @@ async def delete_content(
     
     await db.delete(content)
     
-    # Log the action
     audit_log = AuditLog(
         user_id=current_admin.user_id,
         action="content_deletion",
@@ -144,7 +135,6 @@ async def delete_content(
 
 @router.post("/", response_model=AdminResponse, status_code=status.HTTP_201_CREATED)
 async def create_admin(admin_in: AdminCreate, db: AsyncSession = Depends(get_db)):
-    # Check if admin already exists for this user
     result = await db.execute(select(Admin).where(Admin.user_id == admin_in.user_id))
     if result.scalars().first():
         raise HTTPException(status_code=400, detail="Admin already exists for this user")
@@ -157,8 +147,6 @@ async def create_admin(admin_in: AdminCreate, db: AsyncSession = Depends(get_db)
 
 @router.post("/register-admin", response_model=AdminResponse, status_code=status.HTTP_201_CREATED)
 async def register_admin(admin_data: AdminRegistration, db: AsyncSession = Depends(get_db)):
-    """Create a new user and make them an admin in one transaction."""
-    # Check if a user with this email AND role 'admin' already exists, OR if the username is taken
     result = await db.execute(
         select(User).where(
             ((User.email == admin_data.email) & (User.role == "admin")) |
@@ -172,18 +160,16 @@ async def register_admin(admin_data: AdminRegistration, db: AsyncSession = Depen
             raise HTTPException(status_code=400, detail="Username already exists")
         raise HTTPException(status_code=400, detail="An admin with this email already exists")
     
-    # Create user
     new_user = User(
         email=admin_data.email,
         username=admin_data.username,
         password_hash=hash_password(admin_data.password),
         full_name=admin_data.full_name,
-        role="admin"  # Also mark as admin in user table
+        role="admin"  
     )
     db.add(new_user)
-    await db.flush() # Get user ID
+    await db.flush() 
     
-    # Create admin
     admin = Admin(
         user_id=new_user.id,
         permissions_level=admin_data.permissions_level
@@ -205,9 +191,6 @@ async def read_audit_logs(
     current_admin: User = Depends(get_current_admin),
     db: AsyncSession = Depends(get_db)
 ):
-    """
-    Retrieve system audit logs (Admin only).
-    """
     result = await db.execute(
         select(AuditLog).order_by(AuditLog.timestamp.desc()).offset(skip).limit(limit)
     )

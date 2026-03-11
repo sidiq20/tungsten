@@ -43,7 +43,6 @@ class PostResponse(PostBase):
     created_at: datetime
     updated_at: datetime
     
-    # Optional nested data
     course: Optional[CourseResponse] = None
     tags: List[TagResponse] = []
 

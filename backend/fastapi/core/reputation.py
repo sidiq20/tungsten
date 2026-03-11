@@ -11,13 +11,9 @@ async def update_reputation(
     description: str = None,
     metadata: dict = None
 ):
-    """
-    Update user reputation and log the action.
-    """
     old_score = user.reputation_score
     user.reputation_score += amount
     
-    # Create audit log
     log = AuditLog(
         user_id=user.id,
         action=action_type,
@@ -32,5 +28,5 @@ async def update_reputation(
     
     db.add(log)
     db.add(user)
-    # Note: caller should commit the session
+    
     return user.reputation_score

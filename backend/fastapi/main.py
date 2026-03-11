@@ -4,6 +4,7 @@ from core.config import settings
 from contextlib import asynccontextmanager
 from sqlalchemy import text 
 from models.base import engine
+from core.redis import init_redis, close_redis
 import logging 
 from api.v1.router import api_router
 
@@ -16,10 +17,13 @@ async def lifespan(app: FastAPI):
         async with engine.begin() as conn:
             await conn.execute(text("SELECT 1"))
         logger.info("Successfully connected to neon")
+        await init_redis()
+        logger.info("Successfully connected to Redis")
     except Exception as e:
-        logger.error(f"Failed to connect to neon: {e}")
+        logger.error(f"Failed to connect to neon or Redis: {e}")
         raise e
     yield
+    await close_redis()
     await engine.dispose()
     logger.info("Shutting down")
 

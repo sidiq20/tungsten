@@ -10,10 +10,8 @@ class Admin(Base):
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     user_id = Column(UUID(as_uuid=True), ForeignKey("users.id"), unique=True, nullable=False)
-    permissions_level = Column(Integer, default=1)  # 1: Moderator, 2: Admin, 3: SuperAdmin
+    permissions_level = Column(Integer, default=1) 
     is_active = Column(Boolean, default=True)
     last_active = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     created_at = Column(DateTime, default=datetime.utcnow)
-
-    # Relationship to User
     user = relationship("User", backref="admin_profile")

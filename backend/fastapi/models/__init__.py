@@ -9,8 +9,10 @@ from .tag import Tag, note_tags
 from .vote import Vote
 from .bookmark import user_bookmarks
 from .subscription import course_subscriptions
+from .notification import Notification
 
 __all__ = [
     "Base", "User", "Admin", "Post", "AuditLog", "Report", 
-    "Course", "Tag", "note_tags", "Vote", "user_bookmarks", "course_subscriptions"
+    "Course", "Tag", "note_tags", "Vote", "user_bookmarks", "course_subscriptions",
+    "Notification"
 ]

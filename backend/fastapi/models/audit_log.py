@@ -10,7 +10,8 @@ class AuditLog(Base):
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     user_id = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
-    action = Column(String(100), nullable=False)  # e.g., "reputation_change", "profile_update"
+    action = Column(String(100), nullable=False)  
+    
     description = Column(String(255), nullable=True)
-    metadata_json = Column(JSON, nullable=True)  # Stores detailed delta or context
+    metadata_json = Column(JSON, nullable=True)  
     timestamp = Column(DateTime, default=datetime.utcnow)

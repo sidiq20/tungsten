@@ -1,10 +1,13 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
+from sqlalchemy.orm import joinedload
 from typing import List, Optional, Any
 from uuid import UUID
 
-from api.dependencies import get_db, get_current_user
+from api.dependencies import get_db, get_current_user, get_redis
+from redis.asyncio import Redis
+import json
 from models.post import Post, PostStatus
 from models.user import User
 from schemas.post import PostCreate, PostResponse, PostUpdate
@@ -21,11 +24,9 @@ router = APIRouter()
 async def create_post(
     post_in: PostCreate,
     current_user: User = Depends(get_current_user),
-    db: AsyncSession = Depends(get_db)
+    db: AsyncSession = Depends(get_db),
+    redis: Redis = Depends(get_redis)
 ):
-    """
-    Create a new post/note and award reputation.
-    """
     if post_in.file_url:
         import os
         ext = os.path.splitext(post_in.file_url)[1].lower()
@@ -46,7 +47,6 @@ async def create_post(
         is_anonymous=post_in.is_anonymous
     )
     
-    # Handle tags (same as before)
     if post_in.tags:
         for tag_name in post_in.tags:
             tag_slug = tag_name.lower().replace(" ", "-")
@@ -71,7 +71,16 @@ async def create_post(
     
     await db.commit()
     
-    # Re-load with relationships for the response
+    # Trigger background jobs using Redis
+    try:
+        await redis.publish('note_created', json.dumps({
+            'note_id': str(new_post.id),
+            'uploader_id': str(current_user.id),
+            'status': post_in.status
+        }))
+    except Exception as e:
+        print(f"Failed to publish to redis: {e}")
+    
     from sqlalchemy.orm import joinedload
     result = await db.execute(
         select(Post)
@@ -91,12 +100,9 @@ async def read_posts(
     course_id: Optional[UUID] = None,
     tag: Optional[str] = None,
     search: Optional[str] = None,
-    sort_by: str = "recent", # recent, popular
+    sort_by: str = "recent", 
     db: AsyncSession = Depends(get_db)
 ):
-    """
-    Retrieve published posts with search, filtering, and pagination.
-    """
     skip = (page - 1) * limit
     query = select(Post).where(Post.status == PostStatus.PUBLISHED)
     
@@ -114,19 +120,15 @@ async def read_posts(
             )
         )
         
-    # Total count for pagination
     count_query = select(func.count()).select_from(query.subquery())
     total_result = await db.execute(count_query)
     total = total_result.scalar()
     
-    # Sorting
     if sort_by == "popular":
         query = query.order_by(Post.upvotes.desc(), Post.created_at.desc())
-    else: # recent
+    else: 
         query = query.order_by(Post.created_at.desc())
         
-    # Eager load relationships
-    from sqlalchemy.orm import joinedload
     query = query.options(joinedload(Post.tags), joinedload(Post.course))
         
     result = await db.execute(query.offset(skip).limit(limit))
@@ -144,11 +146,6 @@ async def read_post(
     post_id: UUID,
     db: AsyncSession = Depends(get_db)
 ):
-    """
-    Get a specific post by ID with enriched details.
-    """
-    # Load with joined tags and course
-    from sqlalchemy.orm import joinedload
     result = await db.execute(
         select(Post)
         .options(joinedload(Post.tags), joinedload(Post.course))
@@ -158,13 +155,12 @@ async def read_post(
     
     if not post:
         raise HTTPException(status_code=404, detail="Post not found")
-        
-    # Increment view count
+      
     post.view_count += 1
     db.add(post)
     await db.commit()
     
-    # Reload with joined options to avoid lazy loading error in response serialization
+ 
     result = await db.execute(
         select(Post)
         .options(joinedload(Post.tags), joinedload(Post.course))
@@ -181,9 +177,6 @@ async def update_post(
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db)
 ):
-    """
-    Update a post (must be the author).
-    """
     result = await db.execute(select(Post).where(Post.id == post_id))
     post = result.scalar_one_or_none()
     
@@ -203,7 +196,6 @@ async def update_post(
     db.add(post)
     await db.commit()
     
-    # Reload with relationships
     from sqlalchemy.orm import joinedload
     result = await db.execute(
         select(Post)
@@ -238,7 +230,6 @@ async def bookmark_post(
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db)
 ):
-    """Bookmark a post."""
     post = await db.get(Post, post_id)
     if not post:
         raise HTTPException(status_code=404, detail="Post not found")
@@ -263,7 +254,6 @@ async def unbookmark_post(
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db)
 ):
-    """Remove a bookmark from a post."""
     from sqlalchemy import delete
     from models.bookmark import user_bookmarks
     

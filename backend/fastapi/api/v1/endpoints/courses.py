@@ -18,7 +18,6 @@ async def create_course(
     moderator = Depends(get_course_moderator),
     db: AsyncSession = Depends(get_db)
 ):
-    """Create a new course (Admin only)."""
     result = await db.execute(select(Course).where(Course.code == course_in.code))
     if result.scalar_one_or_none():
         raise HTTPException(status_code=400, detail="Course code already exists")
@@ -39,7 +38,6 @@ async def read_courses(
     search: Optional[str] = None,
     db: AsyncSession = Depends(get_db)
 ):
-    """List all courses with search and pagination."""
     skip = (page - 1) * limit
     query = select(Course)
     
@@ -52,7 +50,6 @@ async def read_courses(
             )
         )
     
-    # Total count
     count_query = select(func.count()).select_from(query.subquery())
     total_result = await db.execute(count_query)
     total = total_result.scalar()
@@ -73,7 +70,6 @@ async def delete_course(
     moderator = Depends(get_course_moderator),
     db: AsyncSession = Depends(get_db)
 ):
-    """Delete a course (Admin only)."""
     course = await db.get(Course, course_id)
     if not course:
         raise HTTPException(status_code=404, detail="Course not found")
@@ -84,7 +80,6 @@ async def delete_course(
 
 @router.get("/{course_id}", response_model=CourseResponse)
 async def read_course(course_id: UUID, db: AsyncSession = Depends(get_db)):
-    """Get course by ID."""
     course = await db.get(Course, course_id)
     if not course:
         raise HTTPException(status_code=404, detail="Course not found")
@@ -97,7 +92,6 @@ async def update_course(
     moderator = Depends(get_course_moderator),
     db: AsyncSession = Depends(get_db)
 ):
-    """Update a course (Admin only)."""
     course = await db.get(Course, course_id)
     if not course:
         raise HTTPException(status_code=404, detail="Course not found")
@@ -116,23 +110,20 @@ async def subscribe_to_course(
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db)
 ):
-    """Subscribe to a course."""
     course = await db.get(Course, course_id)
     if not course:
         raise HTTPException(status_code=404, detail="Course not found")
         
-    # Check if already subscribed
     from sqlalchemy import insert, delete
     from models.subscription import course_subscriptions
     
-    # We use a direct insert to avoid loading relationships if not needed
     try:
         await db.execute(
             insert(course_subscriptions).values(user_id=current_user.id, course_id=course_id)
         )
         await db.commit()
     except Exception:
-        # Prob already exists
+        
         await db.rollback()
         pass
     
@@ -144,7 +135,6 @@ async def unsubscribe_from_course(
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db)
 ):
-    """Unsubscribe from a course."""
     from sqlalchemy import delete
     from models.subscription import course_subscriptions
     

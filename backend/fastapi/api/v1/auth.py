@@ -14,7 +14,6 @@ router = APIRouter()
 @router.post("/register", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
 async def register(user_data: UserCreate, db: AsyncSession = Depends(get_db)):
 
-    # Check if a user with this email AND role already exists, OR if the username is taken
     existing_user_query = await db.execute(
         select(User).where(
             ((User.email == user_data.email) & (User.role == "user")) |
@@ -47,8 +46,6 @@ async def login(
     db: AsyncSession = Depends(get_db)
 ):
 
-    # find user my email oauth uses username field for the login identifier 
-    # Try to find user by email first (but if multiple found, we'll need to be specific or use username)
     user_query = await db.execute(
         select(User).where(
             (User.email == form_data.username) | (User.username == form_data.username)
@@ -63,7 +60,6 @@ async def login(
             headers={"WWW-Authenticate": "Bearer"},
         )
     
-    # If multiple users found (same email), find the one where the password matches
     user = None
     for u in users:
         if verify_password(form_data.password, u.password_hash):
@@ -83,5 +79,5 @@ async def login(
         "access_token": access_token,
         "refresh_token": "not_implemented_yet",
         "token_type": "bearer",
-        "expires_in": 900 # 15 minutes
+        "expires_in": 900 
     }

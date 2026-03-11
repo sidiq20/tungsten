@@ -25,6 +25,5 @@ class User(Base):
         UniqueConstraint('email', 'role', name='_email_role_uc'),
     )
 
-    # Relationships
     bookmarked_posts = relationship("Post", secondary=user_bookmarks, back_populates="bookmarked_by")
     subscribed_courses = relationship("Course", secondary=course_subscriptions, back_populates="subscribers")

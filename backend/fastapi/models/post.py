@@ -30,7 +30,6 @@ class Post(Base):
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
-    # Relationships
     author = relationship("User", backref="posts")
     course = relationship("Course", backref="posts")
     tags = relationship("Tag", secondary="note_tags", backref="posts")

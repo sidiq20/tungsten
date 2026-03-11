@@ -17,10 +17,6 @@ async def global_search(
     q: str,
     db: AsyncSession = Depends(get_db)
 ):
-    """
-    Search across notes/posts and courses.
-    """
-    # Search Posts
     posts_query = (
         select(Post)
         .options(joinedload(Post.tags), joinedload(Post.course))
@@ -36,7 +32,7 @@ async def global_search(
     posts_result = await db.execute(posts_query)
     posts = posts_result.unique().scalars().all()
 
-    # Search Courses
+
     courses_query = select(Course).where(
         or_(
             Course.code.ilike(f"%{q}%"),

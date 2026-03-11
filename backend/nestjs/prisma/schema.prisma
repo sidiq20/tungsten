@@ -1,0 +1,203 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               String       @id @default(uuid()) @db.Uuid
+  email            String       @unique @db.VarChar(255)
+  username         String       @unique @db.VarChar(50)
+  passwordHash     String       @map("password_hash") @db.VarChar(255)
+  fullName         String?      @map("full_name") @db.VarChar(100)
+  reputationScore  Int          @default(0) @map("reputation_score")
+  role             String       @default("user") @db.VarChar(20)
+  isVerified       Boolean      @default(false) @map("is_verified")
+  isBanned         Boolean      @default(false) @map("is_banned")
+  createdAt        DateTime     @default(now()) @map("created_at")
+
+  posts            Post[]       @relation("AuthorPosts")
+  votes            Vote[]
+  comments         Comment[]
+  notifications    Notification[]
+  reportsCreated   Report[]     @relation("ReportedBy")
+  reportsResolved  Report[]     @relation("ResolvedBy")
+  auditLogs        AuditLog[]
+  bookmarks        Bookmark[]
+  subscriptions    Subscription[]
+
+  @@unique([email, role], name: "email_role_unique")
+  @@index([email])
+  @@index([username])
+  @@index([reputationScore])
+  @@map("users")
+}
+
+model Course {
+  id          String   @id @default(uuid()) @db.Uuid
+  code        String   @unique @db.VarChar(20)
+  name        String   @db.VarChar(255)
+  description String?  @db.Text
+  department  String?  @db.VarChar(100)
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  posts        Post[]
+  subscriptions Subscription[]
+
+  @@index([code])
+  @@map("courses")
+}
+
+model Post {
+  id           String   @id @default(uuid()) @db.Uuid
+  authorId     String   @map("author_id") @db.Uuid
+  courseId     String?  @map("course_id") @db.Uuid
+  title        String   @db.VarChar(200)
+  content      String   @db.Text
+  fileUrl      String?  @map("file_url") @db.VarChar(255)
+  fileType     String?  @map("file_type") @db.VarChar(50)
+  viewCount    Int      @default(0) @map("view_count")
+  upvotes      Int      @default(0)
+  isAnonymous  Boolean  @default(false) @map("is_anonymous")
+  status       String   @default("draft") @db.VarChar(50)
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @default(now()) @map("updated_at")
+
+  author       User      @relation("AuthorPosts", fields: [authorId], references: [id], onDelete: Cascade)
+  course       Course?   @relation(fields: [courseId], references: [id], onDelete: SetNull)
+  tags         NoteTag[]
+  bookmarks    Bookmark[]
+  comments     Comment[] @relation("PostComments")
+
+  @@map("posts")
+}
+
+model Tag {
+  id          String   @id @default(uuid()) @db.Uuid
+  name        String   @unique @db.VarChar(50)
+  slug        String   @unique @db.VarChar(50)
+  description String?  @db.VarChar(255)
+
+  posts       NoteTag[]
+
+  @@index([name])
+  @@index([slug])
+  @@map("tags")
+}
+
+model NoteTag {
+  noteId String @map("note_id") @db.Uuid
+  tagId  String @map("tag_id") @db.Uuid
+
+  post   Post @relation(fields: [noteId], references: [id], onDelete: Cascade)
+  tag    Tag  @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([noteId, tagId])
+  @@map("note_tags")
+}
+
+model Bookmark {
+  userId String @map("user_id") @db.Uuid
+  postId String @map("post_id") @db.Uuid
+
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@id([userId, postId])
+  @@map("user_bookmarks")
+}
+
+model Subscription {
+  userId   String @map("user_id") @db.Uuid
+  courseId String @map("course_id") @db.Uuid
+
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@id([userId, courseId])
+  @@map("course_subscriptions")
+}
+
+model Vote {
+  id         String   @id @default(uuid()) @db.Uuid
+  userId     String   @map("user_id") @db.Uuid
+  targetType String   @map("target_type") @db.VarChar(50)
+  targetId   String   @map("target_id") @db.Uuid
+  value      Int
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, targetType, targetId], name: "user_target_vote_unique")
+  @@map("votes")
+}
+
+model Report {
+  id             String    @id @default(uuid()) @db.Uuid
+  reporterId     String    @map("reporter_id") @db.Uuid
+  targetType     String    @map("target_type") @db.VarChar(50)
+  targetId       String    @map("target_id") @db.Uuid
+  reason         String    @db.VarChar(255)
+  status         String    @default("pending") @db.VarChar(20)
+  resolvedById   String?   @map("resolved_by_id") @db.Uuid
+  resolutionNote String?   @map("resolution_note") @db.VarChar(255)
+  createdAt      DateTime  @default(now()) @map("created_at")
+  resolvedAt     DateTime? @map("resolved_at")
+
+  reporter   User  @relation("ReportedBy", fields: [reporterId], references: [id], onDelete: Cascade)
+  resolvedBy User? @relation("ResolvedBy", fields: [resolvedById], references: [id], onDelete: SetNull)
+
+  @@map("reports")
+}
+
+model AuditLog {
+  id           String   @id @default(uuid()) @db.Uuid
+  userId       String   @map("user_id") @db.Uuid
+  action       String   @db.VarChar(100)
+  description  String?  @db.VarChar(255)
+  metadataJson Json?    @map("metadata_json")
+  timestamp    DateTime @default(now())
+
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("audit_logs")
+}
+
+model Comment {
+  id         String   @id @default(uuid()) @db.Uuid
+  authorId   String   @map("author_id") @db.Uuid
+  postId     String   @map("post_id") @db.Uuid
+  parentId   String?  @map("parent_id") @db.Uuid
+  content    String   @db.Text
+  isDeleted  Boolean  @default(false) @map("is_deleted")
+  upvotes    Int      @default(0)
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @default(now()) @map("updated_at")
+
+  author     User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  post       Post     @relation("PostComments", fields: [postId], references: [id], onDelete: Cascade)
+  parent     Comment? @relation("CommentReplies", fields: [parentId], references: [id], onDelete: SetNull)
+  replies    Comment[] @relation("CommentReplies")
+
+  @@map("comments")
+}
+
+model Notification {
+  id         String   @id @default(uuid()) @db.Uuid
+  userId     String   @map("user_id") @db.Uuid
+  type       String   @db.VarChar(50)  // "mention", "reply", "vote", "system"
+  title      String   @db.VarChar(255)
+  content    String   @db.Text
+  targetId   String?  @map("target_id") @db.Uuid
+  targetType String?  @map("target_type") @db.VarChar(50)
+  isRead     Boolean  @default(false) @map("is_read")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, isRead])
+  @@map("notifications")
+}

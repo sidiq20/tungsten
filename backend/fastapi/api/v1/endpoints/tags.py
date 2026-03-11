@@ -16,7 +16,6 @@ async def create_tag(
     current_user = Depends(get_current_user),
     db: AsyncSession = Depends(get_db)
 ):
-    """Create a new tag (Any logged in user)."""
     result = await db.execute(select(Tag).where(Tag.slug == tag_in.slug))
     if result.scalar_one_or_none():
         raise HTTPException(status_code=400, detail="Tag slug already exists")
@@ -33,13 +32,11 @@ async def read_tags(
     limit: int = 100,
     db: AsyncSession = Depends(get_db)
 ):
-    """List all tags."""
     result = await db.execute(select(Tag).offset(skip).limit(limit))
     return result.scalars().all()
 
 @router.get("/search", response_model=List[TagResponse])
 async def search_tags(q: str, db: AsyncSession = Depends(get_db)):
-    """Search tags for auto-suggest."""
     result = await db.execute(
         select(Tag).where(Tag.name.ilike(f"%{q}%")).limit(10)
     )

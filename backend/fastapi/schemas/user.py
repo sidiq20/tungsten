@@ -1,5 +1,5 @@
-from pydantic import BaseModel, EmailStr, Field 
-from typing import Optional 
+from pydantic import BaseModel, EmailStr, Field, ConfigDict 
+from typing import Optional, Dict, Any 
 from uuid import UUID
 from datetime import datetime
 
@@ -20,16 +20,19 @@ class UserUpdate(BaseModel):
     username: Optional[str] = Field(None, min_length=3, max_length=50)
     full_name: Optional[str] = None
     password: Optional[str] = Field(None, min_length=8)
+    privacy_settings: Optional[Dict[str, Any]] = None
+    profile_metadata: Optional[Dict[str, Any]] = None
  
 class UserResponse(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
     id: UUID
     email: EmailStr
     username: str 
-    full_name: Optional[str]   
-    reputation_score: int 
-    role: str 
-    is_verified: bool 
+    full_name: Optional[str] = None   
+    reputation_score: int = 0
+    role: str = "user"
+    is_verified: bool = False
+    privacy_settings: Optional[Dict[str, Any]] = None
+    profile_metadata: Optional[Dict[str, Any]] = None
     created_at: datetime 
-
-    class Config:      
-        from_attributes = True

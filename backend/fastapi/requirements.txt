@@ -9,3 +9,5 @@ alembic>=1.12.1       # Database migrations
 python-jose[cryptography]>=3.3.0 # JWT tokens
 passlib[argon2]>=1.7.4 # Password hashing
 python-multipart>=0.0.6 # For OAuth2 form data
+aioboto3>=11.2.0
+redis>=5.0.1

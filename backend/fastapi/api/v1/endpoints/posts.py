@@ -16,7 +16,7 @@ from core.reputation import update_reputation
 from models.tag import Tag
 from models.course import Course
 from models.vote import Vote
-from schemas.vote import VoteResponse
+from schemas.vote import VoteResponse, VoteToggle
 
 router = APIRouter()
 
@@ -113,10 +113,10 @@ async def read_posts(
         query = query.join(Post.tags).where(Tag.slug == tag)
         
     if search:
+        # PostgreSQL Full-Text Search
         query = query.where(
-            or_(
-                Post.title.ilike(f"%{search}%"),
-                Post.content.ilike(f"%{search}%")
+            func.to_tsvector('english', Post.title + ' ' + Post.content).op('@@')(
+                func.plainto_tsquery('english', search)
             )
         )
         
@@ -265,3 +265,98 @@ async def unbookmark_post(
     )
     await db.commit()
     return None
+
+@router.post("/{post_id}/vote", response_model=VoteResponse)
+async def toggle_vote(
+    post_id: UUID,
+    vote_in: VoteToggle,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+    redis: Redis = Depends(get_redis)
+):
+    # Verify post exists
+    post = await db.get(Post, post_id)
+    if not post:
+        raise HTTPException(status_code=404, detail="Post not found")
+    
+    # Check if user already voted
+    result = await db.execute(
+        select(Vote).where(
+            (Vote.user_id == current_user.id) & 
+            (Vote.target_id == post_id) & 
+            (Vote.target_type == "post")
+        )
+    )
+    existing_vote = result.scalar_one_or_none()
+    
+    rep_delta = 0
+    vote_removed = False
+    if existing_vote:
+        if existing_vote.value == vote_in.value:
+            # Clicking the same vote twice removes it
+            await db.delete(existing_vote)
+            rep_delta = -5 if vote_in.value > 0 else 2 # Reversing upvote/downvote rep
+            vote_removed = True
+        else:
+            # Changing vote from up to down or vice versa
+            old_value = existing_vote.value
+            existing_vote.value = vote_in.value
+            db.add(existing_vote)
+            rep_delta = (vote_in.value - old_value) * 5 
+    else:
+        # New vote
+        new_vote = Vote(
+            user_id=current_user.id,
+            target_id=post_id,
+            target_type="post",
+            value=vote_in.value
+        )
+        db.add(new_vote)
+        rep_delta = 5 if vote_in.value > 0 else -2
+    
+    await db.flush() # Ensure counts are correct
+
+    # Update post count
+    result = await db.execute(
+        select(func.sum(Vote.value)).where(
+            (Vote.target_id == post_id) & (Vote.target_type == "post")
+        )
+    )
+    new_upvotes = result.scalar() or 0
+    post.upvotes = new_upvotes
+    db.add(post)
+    
+    # Update author's reputation
+    if rep_delta != 0 and post.author_id != current_user.id:
+        from models.user import User as Author
+        result = await db.execute(select(Author).where(Author.id == post.author_id))
+        author = result.scalar_one_or_none()
+        if author:
+            await update_reputation(
+                db, 
+                author, 
+                amount=rep_delta, 
+                action_type="post_voted", 
+                description=f"Reputation changed due to vote on: {post.title}"
+            )
+    
+    await db.commit()
+    
+    # Publish to Redis for NestJS real-time broadcast
+    try:
+        await redis.publish('vote_updated', json.dumps({
+            'target_id': str(post_id),
+            'target_type': 'post',
+            'new_count': int(new_upvotes),
+            'user_id': str(current_user.id),
+            'value': vote_in.value
+        }))
+    except Exception as e:
+        print(f"Failed to publish vote update: {e}")
+        
+    return VoteResponse(
+        target_id=post_id,
+        upvotes=new_upvotes,
+        downvotes=0,
+        user_vote=None if vote_removed else vote_in.value
+    )

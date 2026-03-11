@@ -62,6 +62,13 @@ async def update_user_me(
     if user_in.password is not None:
         current_user.password_hash = hash_password(user_in.password)
 
+    if user_in.privacy_settings is not None:
+        # Merge or replace. Here we replace for simplicity.
+        current_user.privacy_settings = user_in.privacy_settings
+
+    if user_in.profile_metadata is not None:
+        current_user.profile_metadata = user_in.profile_metadata
+
     db.add(current_user)
     await db.commit()
     await db.refresh(current_user)

@@ -3,6 +3,15 @@ from models.user import User
 from models.audit_log import AuditLog
 import json
 
+REPUTATION_WEIGHTS = {
+    "post_created": 10,
+    "post_upvoted": 5,
+    "post_downvoted": -2,
+    "comment_upvoted": 2,
+    "bookmark_received": 1,
+    "report_resolved_valid": -50, # Penalty for valid report
+}
+
 async def update_reputation(
     db: AsyncSession, 
     user: User, 

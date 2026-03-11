@@ -1,5 +1,5 @@
-from sqlalchemy import Column, Integer, String, Boolean, DateTime, UniqueConstraint
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy import Column, Integer, String, Boolean, DateTime, UniqueConstraint, JSON
+from sqlalchemy.dialects.postgresql import UUID, JSONB
 import uuid
 from datetime import datetime
 from sqlalchemy.orm import relationship
@@ -19,6 +19,8 @@ class User(Base):
     role = Column(String(20), default="user")
     is_verified = Column(Boolean, default=False)
     is_banned = Column(Boolean, default=False)
+    privacy_settings = Column(JSONB, default={"is_profile_public": True})
+    profile_metadata = Column(JSONB, default={})
     created_at = Column(DateTime, default=datetime.utcnow)
     
     __table_args__ = (

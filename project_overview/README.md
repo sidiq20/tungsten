@@ -10,29 +10,40 @@ The foundation for cross-service communication is fully operational.
 
 ---
 
-## FastAPI Developer: The Data & Logic Source
-The FastAPI service acts as the **Source of Truth**. It handles heavy data management and broadcasts state changes.
+## Phase 1 Status: Backend Development
 
-### Remaining Tasks:
-- [ ] **Search Engine**: Implement high-performance search using PostgreSQL Full-Text Search (FTS).
-- [ ] **Courses & Tags**: Finalize the discovery API for categorization of study materials.
-- [ ] **User Profiles**: Implement privacy settings and user metadata management.
-- [ ] **Content Moderation**: Build the reporting API and admin moderation endpoints.
-- [ ] **Voting & Reputation**: Finalize the core weight calculation engine for user reputation.
+### FastAPI Developer: The Data & Logic Source (Status: NEARLY COMPLETE ✅)
+The FastAPI service is the core "Source of Truth," managing the primary data models and broadcasting state changes.
+
+#### Completed Works:
+- [x] **Search Engine**: PostgreSQL Full-Text Search (FTS) implemented.
+- [x] **Courses & Tags**: Discovery API and tag categorization system established.
+- [x] **User Profiles**: Privacy settings and profile metadata with schema-safe JSONB storage.
+- [x] **Voting & Reputation**: Reputation engine with Redis Pub/Sub integration for real-time bridge.
+- [x] **Security Hardening**: Rate limiting and security headers (CSP, HSTS) applied.
+- [x] **Moderation**: Admin report management and content flagging logic.
+
+#### Remaining for Phase 1:
+- [ ] **Activity Tracking**: Finalize the event-log audit system for user actions.
 
 ---
 
-## NestJS Developer: The Experience & Automation Layer
-The NestJS service acts as the **Reactor**. It handles the real-time user experience and background automation.
+### NestJS Developer: The Experience & Automation Layer (Status: IN PROGRESS 🚧)
+The NestJS service handles the real-time interaction, GraphQL federation, and background processing.
 
-### Remaining Tasks:
-- [ ] **Commenting System**: Build the GraphQL threaded/nested comments system.
-- [ ] **Advanced Notifications**: Implement follower alerts and customizable notification preferences.
-- [ ] **Media Processing**:
-    - Build Bull workers for automatic virus scanning of uploads.
-    - Implement thumbnail generation for PDF/Image notes.
-- [ ] **Leaderboards**: Build the aggregation engine that calculates global and course-based leaderboards from reputation scores.
-- [ ] **Real-time Gateway**: Expand WebSockets for live chat or collaborative features.
+#### Completed Works:
+- [x] **Infrastructure**: GraphQL, Bull Queue, and Redis bridge setup.
+- [x] **Comments**: Core GraphQL threaded/nested commenting system.
+- [x] **Notifications**: WebSocket Gateway (`/notifications`) and basic inbox logic.
+- [x] **Leaderboard Module**: Scaffolded with Redis connection.
+
+#### Remaining for Phase 1:
+- [ ] **GraphQL Subscriptions**: Enable real-time updates for comments, votes, and notifications.
+- [ ] **Media processing (Bull Workers)**:
+    - [ ] Implement ClamAV virus scanning for PDF/Image uploads.
+    - [ ] Implement Sharp thumbnail generation for uploaded materials.
+- [ ] **Advanced Notifications**: Follower alerts and customizable user notification preferences.
+- [ ] **Leaderboard Logic**: Global and course-based ranking aggregation from reputation scores.
 
 ---
 
@@ -43,4 +54,4 @@ When building new features, follow this pattern:
 3. **NestJS** triggers a background job (Bull) or pushes to the client via WebSockets.
 
 **Example**: 
-FastAPI saves a new Vote -> Publishes `vote_updated` -> NestJS broadcasts new count to the UI.
+FastAPI saves a new Vote -> Publishes `vote_updated` -> NestJS broadcasts new count to the UI via GraphQL Subscription.

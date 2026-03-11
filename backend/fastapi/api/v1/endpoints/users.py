@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from sqlalchemy.orm import selectinload
@@ -12,6 +12,7 @@ from schemas.user import UserResponse, UserUpdate
 from schemas.post import PostResponse
 from schemas.course import CourseResponse
 from core.security import hash_password
+from core.limiter import limiter
 
 router = APIRouter()
 
@@ -22,7 +23,9 @@ async def read_user_me(
     return current_user
 
 @router.patch("/me", response_model=UserResponse)
+@limiter.limit("10/minute")
 async def update_user_me(
+    request: Request,
     user_in: UserUpdate,
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db)

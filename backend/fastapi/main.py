@@ -6,6 +6,10 @@ from sqlalchemy import text
 from models.base import engine
 from core.redis import init_redis, close_redis
 import logging 
+from starlette.requests import Request
+from starlette.responses import Response
+
+from core.limiter import limiter
 from api.v1.router import api_router
 
 logging.basicConfig(level=logging.INFO)
@@ -36,6 +40,12 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+from slowapi.errors import RateLimitExceeded
+from slowapi import _rate_limit_exceeded_handler
+
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -43,6 +53,17 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.middleware("http")
+async def add_security_headers(request: Request, call_next):
+    response: Response = await call_next(request)
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["X-XSS-Protection"] = "1; mode=block"
+    response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
+    response.headers["Content-Security-Policy"] = "default-src 'self'; frame-ancestors 'none'; object-src 'none'"
+    response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+    return response
 
 @app.get("/", tags=["root"])
 async def root():

@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from sqlalchemy.orm import joinedload
@@ -12,6 +12,7 @@ from models.post import Post, PostStatus
 from models.user import User
 from schemas.post import PostCreate, PostResponse, PostUpdate
 from core.reputation import update_reputation
+from core.limiter import limiter
 
 from models.tag import Tag
 from models.course import Course
@@ -21,7 +22,9 @@ from schemas.vote import VoteResponse, VoteToggle
 router = APIRouter()
 
 @router.post("/", response_model=PostResponse, status_code=status.HTTP_201_CREATED)
+@limiter.limit("10/hour")
 async def create_post(
+    request: Request,
     post_in: PostCreate,
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
@@ -267,7 +270,9 @@ async def unbookmark_post(
     return None
 
 @router.post("/{post_id}/vote", response_model=VoteResponse)
+@limiter.limit("20/minute")
 async def toggle_vote(
+    request: Request,
     post_id: UUID,
     vote_in: VoteToggle,
     current_user: User = Depends(get_current_user),

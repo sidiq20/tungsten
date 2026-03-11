@@ -11,3 +11,4 @@ passlib[argon2]>=1.7.4 # Password hashing
 python-multipart>=0.0.6 # For OAuth2 form data
 aioboto3>=11.2.0
 redis>=5.0.1
+slowapi>=0.1.9

@@ -9,9 +9,17 @@ from schemas.user import UserCreate, UserResponse, TokenResponse
 from core.security import hash_password, verify_password, create_access_token
 from core.limiter import limiter
 from core.audit import log_action
+from core.config import settings
 
 router = APIRouter()
 
+GOOGLE_CLIENT_ID = settings.GOOGLE_CLIENT_ID
+GOOGLE_CLIENT_SECRET = settings.GOOGLE_CLIENT_SECRET
+GOOGLE_REDIRECT_URI = settings.GOOGLE_REDIRECT_URI
+
+GOOGLE_AUTH_ENDPOINT = "https://accounts.google.com/o/oauth2/auth"
+GOOGLE_TOKEN_ENDPOINT = "https://oauth2.googleapis.com/token"
+GOOGLE_USERINFO_ENDPOINT = "https://googleapis.com/oauth2/v2/userinfo"
 
 @router.post("/register", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
 @limiter.limit("5/minute")

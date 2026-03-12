@@ -36,3 +36,8 @@ class UserResponse(BaseModel):
     privacy_settings: Optional[Dict[str, Any]] = None
     profile_metadata: Optional[Dict[str, Any]] = None
     created_at: datetime 
+
+class UserCreateGoogle(BaseModel):
+    email: EmailStr
+    username: str = Field(..., min_length=3, max_length=50)
+    full_name: Optional[str] = None 

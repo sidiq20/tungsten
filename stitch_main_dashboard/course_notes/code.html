@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tungsten Learn - Course Notes</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2111d4",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#121022",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<!-- Sticky Top Header -->
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-primary/10">
+<div class="flex items-center p-4 justify-between max-w-2xl mx-auto">
+<div class="flex items-center gap-3">
+<button class="flex size-10 items-center justify-center rounded-full hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-slate-900 dark:text-slate-100">arrow_back</span>
+</button>
+<div class="flex flex-col">
+<h2 class="text-lg font-bold leading-tight tracking-tight">Advanced Calculus II</h2>
+<p class="text-xs font-medium text-primary uppercase tracking-wider">Mathematics Dept</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex size-10 items-center justify-center rounded-full hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="flex size-10 items-center justify-center rounded-full hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+</header>
+<main class="max-w-2xl mx-auto pb-24">
+<!-- Course Meta Card -->
+<div class="p-4">
+<div class="bg-white dark:bg-slate-900 rounded-xl p-6 shadow-sm border border-primary/5">
+<div class="flex items-center gap-4">
+<div class="size-20 rounded-lg bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-4xl">functions</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">Science Faculty</p>
+<h1 class="text-xl font-bold">Advanced Calculus II</h1>
+<div class="flex gap-4 mt-2">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-primary">description</span>
+<span class="text-xs font-semibold">42 Notes</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-primary">group</span>
+<span class="text-xs font-semibold">1.2k Students</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Filter and Sort Row -->
+<div class="px-4 flex gap-3 overflow-x-auto no-scrollbar py-2">
+<button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-full bg-primary text-white px-5 shadow-md shadow-primary/20">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+<span class="text-sm font-medium">All Notes</span>
+</button>
+<button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-slate-800 border border-primary/10 px-5">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span class="text-sm font-medium">By Date</span>
+</button>
+<button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-slate-800 border border-primary/10 px-5">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span class="text-sm font-medium">Popularity</span>
+</button>
+<button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-slate-800 border border-primary/10 px-5">
+<span class="material-symbols-outlined text-sm">visibility</span>
+<span class="text-sm font-medium">Most Viewed</span>
+</button>
+</div>
+<!-- Notes List -->
+<div class="p-4 space-y-4">
+<!-- Note Card 1 -->
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-primary/5 shadow-sm flex gap-4 items-start hover:border-primary/30 transition-all cursor-pointer group">
+<div class="size-12 rounded-lg bg-red-50 dark:bg-red-900/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-red-600 dark:text-red-400">picture_as_pdf</span>
+</div>
+<div class="flex-1">
+<h3 class="font-bold text-base group-hover:text-primary transition-colors">Week 4: Partial Derivatives &amp; Chain Rule</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Uploaded by <span class="text-primary font-medium">Sarah Jenkins</span></p>
+<div class="flex items-center gap-4 mt-3">
+<span class="text-[11px] font-bold text-slate-400 uppercase tracking-tighter">Oct 12, 2023</span>
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-1 text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined text-xs">thumb_up</span>
+<span class="text-xs font-bold">124</span>
+</div>
+<div class="flex items-center gap-1 text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined text-xs">visibility</span>
+<span class="text-xs font-bold">1.5k</span>
+</div>
+</div>
+</div>
+</div>
+<button class="text-slate-400 hover:text-primary">
+<span class="material-symbols-outlined">bookmark</span>
+</button>
+</div>
+<!-- Note Card 2 -->
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-primary/5 shadow-sm flex gap-4 items-start hover:border-primary/30 transition-all cursor-pointer group">
+<div class="size-12 rounded-lg bg-red-50 dark:bg-red-900/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-red-600 dark:text-red-400">picture_as_pdf</span>
+</div>
+<div class="flex-1">
+<h3 class="font-bold text-base group-hover:text-primary transition-colors">Midterm Exam Preparation Guide</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Uploaded by <span class="text-primary font-medium">David Miller</span></p>
+<div class="flex items-center gap-4 mt-3">
+<span class="text-[11px] font-bold text-slate-400 uppercase tracking-tighter">Oct 05, 2023</span>
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-1 text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined text-xs">thumb_up</span>
+<span class="text-xs font-bold">89</span>
+</div>
+<div class="flex items-center gap-1 text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined text-xs">visibility</span>
+<span class="text-xs font-bold">3.2k</span>
+</div>
+</div>
+</div>
+</div>
+<button class="text-slate-400 hover:text-primary">
+<span class="material-symbols-outlined">bookmark</span>
+</button>
+</div>
+<!-- Note Card 3 -->
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-primary/5 shadow-sm flex gap-4 items-start hover:border-primary/30 transition-all cursor-pointer group">
+<div class="size-12 rounded-lg bg-red-50 dark:bg-red-900/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-red-600 dark:text-red-400">picture_as_pdf</span>
+</div>
+<div class="flex-1">
+<h3 class="font-bold text-base group-hover:text-primary transition-colors">Vector Fields and Line Integrals</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Uploaded by <span class="text-primary font-medium">Emily Chen</span></p>
+<div class="flex items-center gap-4 mt-3">
+<span class="text-[11px] font-bold text-slate-400 uppercase tracking-tighter">Sep 28, 2023</span>
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-1 text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined text-xs">thumb_up</span>
+<span class="text-xs font-bold">210</span>
+</div>
+<div class="flex items-center gap-1 text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined text-xs">visibility</span>
+<span class="text-xs font-bold">940</span>
+</div>
+</div>
+</div>
+</div>
+<button class="text-slate-400 hover:text-primary">
+<span class="material-symbols-outlined">bookmark</span>
+</button>
+</div>
+<!-- Note Card 4 -->
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-primary/5 shadow-sm flex gap-4 items-start hover:border-primary/30 transition-all cursor-pointer group">
+<div class="size-12 rounded-lg bg-red-50 dark:bg-red-900/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-red-600 dark:text-red-400">picture_as_pdf</span>
+</div>
+<div class="flex-1">
+<h3 class="font-bold text-base group-hover:text-primary transition-colors">Taylor Series Expansion Review</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Uploaded by <span class="text-primary font-medium">Alex Thompson</span></p>
+<div class="flex items-center gap-4 mt-3">
+<span class="text-[11px] font-bold text-slate-400 uppercase tracking-tighter">Sep 15, 2023</span>
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-1 text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined text-xs">thumb_up</span>
+<span class="text-xs font-bold">45</span>
+</div>
+<div class="flex items-center gap-1 text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined text-xs">visibility</span>
+<span class="text-xs font-bold">450</span>
+</div>
+</div>
+</div>
+</div>
+<button class="text-slate-400 hover:text-primary">
+<span class="material-symbols-outlined">bookmark</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 bg-white/90 dark:bg-slate-900/90 backdrop-blur-lg border-t border-primary/10 px-6 py-2 z-50">
+<div class="max-w-2xl mx-auto flex justify-between items-center">
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="text-[10px] font-bold uppercase tracking-tight">Courses</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">folder_open</span>
+<span class="text-[10px] font-bold uppercase tracking-tight">Library</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">style</span>
+<span class="text-[10px] font-bold uppercase tracking-tight">Flashcards</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="text-[10px] font-bold uppercase tracking-tight">Profile</span>
+</a>
+</div>
+</nav>
+<!-- Floating Action Button -->
+<button class="fixed bottom-24 right-6 size-14 bg-primary text-white rounded-full shadow-lg shadow-primary/40 flex items-center justify-center hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-2xl">add</span>
+</button>
+</body></html>

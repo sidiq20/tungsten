@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2111d4",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#121022",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<title>Tungsten Learn - Upload Metadata</title>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex justify-center">
+<div class="relative flex h-full min-h-screen w-full max-w-[480px] flex-col bg-white dark:bg-background-dark overflow-x-hidden shadow-xl">
+<!-- Top Navigation -->
+<div class="flex items-center bg-white dark:bg-background-dark p-4 pb-2 justify-between">
+<div class="text-slate-900 dark:text-slate-100 flex size-12 shrink-0 items-center justify-start cursor-pointer">
+<span class="material-symbols-outlined">arrow_back</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-tight flex-1">Upload Note</h2>
+<div class="size-12 flex items-center justify-end">
+<span class="material-symbols-outlined text-primary">info</span>
+</div>
+</div>
+<!-- Progress Indicator -->
+<div class="flex w-full flex-row items-center justify-center gap-3 py-5">
+<div class="h-2 w-2 rounded-full bg-primary/20"></div>
+<div class="h-2 w-8 rounded-full bg-primary"></div>
+<div class="h-2 w-2 rounded-full bg-primary/20"></div>
+</div>
+<!-- Form Content -->
+<div class="flex flex-col flex-1 px-4 gap-6 overflow-y-auto pb-32">
+<!-- Note Title -->
+<div class="flex flex-col gap-2">
+<label class="text-slate-900 dark:text-slate-100 text-sm font-semibold leading-normal">Note Title</label>
+<input class="form-input flex w-full rounded-xl border border-primary/10 bg-primary/5 dark:bg-primary/10 text-slate-900 dark:text-slate-100 focus:border-primary focus:ring-1 focus:ring-primary h-14 placeholder:text-slate-400 p-4 text-base font-normal" placeholder="e.g. Week 4 - Vector Fields" type="text" value="Advanced Calculus Lecture Notes"/>
+</div>
+<!-- Description -->
+<div class="flex flex-col gap-2">
+<label class="text-slate-900 dark:text-slate-100 text-sm font-semibold leading-normal">Description</label>
+<textarea class="form-input flex w-full rounded-xl border border-primary/10 bg-primary/5 dark:bg-primary/10 text-slate-900 dark:text-slate-100 focus:border-primary focus:ring-1 focus:ring-primary min-h-32 placeholder:text-slate-400 p-4 text-base font-normal" placeholder="Briefly describe what's covered in these notes..."></textarea>
+</div>
+<!-- Select Course -->
+<div class="flex flex-col gap-2">
+<label class="text-slate-900 dark:text-slate-100 text-sm font-semibold leading-normal">Select Course</label>
+<div class="relative">
+<select class="form-select flex w-full appearance-none rounded-xl border border-primary/10 bg-primary/5 dark:bg-primary/10 text-slate-900 dark:text-slate-100 focus:border-primary focus:ring-1 focus:ring-primary h-14 p-4 text-base font-normal">
+<option value="adv_calc_2">Advanced Calculus II</option>
+<option value="linear_alg">Linear Algebra</option>
+<option value="diff_eq">Differential Equations</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
+<span class="material-symbols-outlined">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Add Tags -->
+<div class="flex flex-col gap-2">
+<label class="text-slate-900 dark:text-slate-100 text-sm font-semibold leading-normal">Add Tags</label>
+<div class="flex flex-wrap gap-2 mb-2">
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium">
+                        #calculus
+                        <span class="material-symbols-outlined text-[14px] ml-1 cursor-pointer">close</span>
+</span>
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium">
+                        #notes
+                        <span class="material-symbols-outlined text-[14px] ml-1 cursor-pointer">close</span>
+</span>
+</div>
+<input class="form-input flex w-full rounded-xl border border-primary/10 bg-primary/5 dark:bg-primary/10 text-slate-900 dark:text-slate-100 focus:border-primary focus:ring-1 focus:ring-primary h-14 placeholder:text-slate-400 p-4 text-base font-normal" placeholder="Type to add tags..." type="text"/>
+<div class="flex gap-2 mt-1">
+<button class="px-3 py-1 text-xs bg-slate-100 dark:bg-slate-800 rounded-full text-slate-500 border border-slate-200 dark:border-slate-700 hover:border-primary transition-colors">+ #midterm</button>
+<button class="px-3 py-1 text-xs bg-slate-100 dark:bg-slate-800 rounded-full text-slate-500 border border-slate-200 dark:border-slate-700 hover:border-primary transition-colors">+ #integration</button>
+<button class="px-3 py-1 text-xs bg-slate-100 dark:bg-slate-800 rounded-full text-slate-500 border border-slate-200 dark:border-slate-700 hover:border-primary transition-colors">+ #vectors</button>
+</div>
+</div>
+<!-- Anonymous Toggle -->
+<div class="flex items-center justify-between py-2">
+<div class="flex flex-col">
+<span class="text-slate-900 dark:text-slate-100 text-sm font-semibold">Post Anonymously</span>
+<span class="text-slate-500 text-xs">Your name won't be shown to others</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+<!-- Bottom Action Bar -->
+<div class="absolute bottom-0 left-0 right-0 p-4 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-t border-slate-100 dark:border-slate-800 flex gap-4">
+<button class="flex-1 h-14 flex items-center justify-center rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-semibold text-base transition-all active:scale-95">
+                Back
+            </button>
+<button class="flex-[2] h-14 flex items-center justify-center rounded-xl bg-primary text-white font-semibold text-base shadow-lg shadow-primary/20 transition-all active:scale-95">
+                Publish Note
+            </button>
+</div>
+</div>
+</body></html>

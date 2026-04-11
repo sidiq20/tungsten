@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2111d4",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#121022",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<title>Tungsten Learn Dashboard</title>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen pb-24">
+<!-- Header Section -->
+<header class="sticky top-0 z-10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-4 pt-6 pb-4">
+<div class="flex items-center justify-between mb-4">
+<div>
+<h1 class="text-xs font-medium text-primary uppercase tracking-wider">Welcome back,</h1>
+<p class="text-xl font-bold">Alex Johnson</p>
+</div>
+<div class="relative">
+<img alt="Profile" class="w-10 h-10 rounded-full border-2 border-primary/20" data-alt="User profile avatar smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALAmpFokOWT4p2qB4rCy1SjqS9_nceygNE7ab_RyJwbRjogLRQLcWbMRLYRwsgJZxlUmAE6PwU5Vxm9bU_3diBFxjitTgvgeGh8T9jh9kA1CpUy-5LlyE_7cKBmYCeZsGYe9hrxma7DPfwfdkw9ezIRMVmAq2n5iVqc-8Qv9fzGjRR83cUlb5uksNJlNHBjLrQXZoUABE0zsPY784kl2RlqiG4WVuJKNCBpy9nIICgAIQRjiN9Yd7RNgOfxqehdRcCyHJkUXqVDg"/>
+<span class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-background-light dark:border-background-dark rounded-full"></span>
+</div>
+</div>
+<!-- Search Bar -->
+<div class="relative group">
+<span class="material-icons-round absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary">search</span>
+<input class="w-full pl-10 pr-4 py-3 bg-white dark:bg-slate-900 border-none rounded-xl shadow-sm focus:ring-2 focus:ring-primary text-sm transition-all" placeholder="Search courses, notes, or tutors..." type="text"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400">
+<span class="material-icons-round text-lg">tune</span>
+</button>
+</div>
+</header>
+<main class="px-4 space-y-8">
+<!-- My Courses Section -->
+<section>
+<div class="flex items-center justify-between mb-4">
+<h2 class="text-lg font-bold">My Courses</h2>
+<a class="text-xs font-semibold text-primary" href="#">View All</a>
+</div>
+<div class="flex gap-4 overflow-x-auto pb-2 scrollbar-hide -mx-4 px-4">
+<!-- Course Card 1 -->
+<div class="flex-none w-64 bg-white dark:bg-slate-900 rounded-xl p-4 shadow-sm border border-slate-100 dark:border-slate-800">
+<div class="flex items-start justify-between mb-3">
+<div class="p-2 bg-primary/10 rounded-lg">
+<span class="material-icons-round text-primary">functions</span>
+</div>
+<span class="text-[10px] font-bold px-2 py-1 bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 rounded-full">85% DONE</span>
+</div>
+<h3 class="font-bold text-sm mb-1">Advanced Calculus II</h3>
+<p class="text-xs text-slate-500 mb-4">Mathematics Department</p>
+<div class="w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[85%] rounded-full"></div>
+</div>
+</div>
+<!-- Course Card 2 -->
+<div class="flex-none w-64 bg-white dark:bg-slate-900 rounded-xl p-4 shadow-sm border border-slate-100 dark:border-slate-800">
+<div class="flex items-start justify-between mb-3">
+<div class="p-2 bg-primary/10 rounded-lg">
+<span class="material-icons-round text-primary">biotech</span>
+</div>
+<span class="text-[10px] font-bold px-2 py-1 bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400 rounded-full">32% DONE</span>
+</div>
+<h3 class="font-bold text-sm mb-1">Molecular Biology</h3>
+<p class="text-xs text-slate-500 mb-4">Science &amp; Research</p>
+<div class="w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[32%] rounded-full"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Popular Notes Today -->
+<section>
+<div class="flex items-center justify-between mb-4">
+<h2 class="text-lg font-bold">Popular Notes Today</h2>
+<span class="material-icons-round text-slate-400">trending_up</span>
+</div>
+<div class="space-y-3">
+<div class="flex items-center p-3 bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800">
+<div class="w-12 h-12 rounded-lg bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center text-indigo-600 dark:text-indigo-400 mr-4">
+<span class="material-icons-round">description</span>
+</div>
+<div class="flex-1">
+<h4 class="text-sm font-semibold">Macroeconomics Final Prep</h4>
+<p class="text-[10px] text-slate-500 uppercase font-medium">By Sarah Williams • 1.2k views</p>
+</div>
+<button class="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-primary">
+<span class="material-icons-round">bookmark_border</span>
+</button>
+</div>
+<div class="flex items-center p-3 bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800">
+<div class="w-12 h-12 rounded-lg bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 mr-4">
+<span class="material-icons-round">history_edu</span>
+</div>
+<div class="flex-1">
+<h4 class="text-sm font-semibold">Roman Architecture Summary</h4>
+<p class="text-[10px] text-slate-500 uppercase font-medium">By Marcus Chen • 850 views</p>
+</div>
+<button class="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-primary">
+<span class="material-icons-round">bookmark_border</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Recent Activity -->
+<section>
+<div class="flex items-center justify-between mb-4">
+<h2 class="text-lg font-bold">Recent Activity</h2>
+</div>
+<div class="relative pl-6 space-y-6 before:content-[''] before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-0.5 before:bg-slate-200 dark:before:bg-slate-800">
+<div class="relative">
+<div class="absolute -left-[21px] top-1 w-3 h-3 rounded-full bg-primary border-4 border-background-light dark:border-background-dark"></div>
+<div>
+<p class="text-sm font-medium">Completed Quiz: <span class="text-primary font-bold italic">Linear Algebra 101</span></p>
+<p class="text-[11px] text-slate-500 mt-0.5">2 hours ago</p>
+</div>
+</div>
+<div class="relative">
+<div class="absolute -left-[21px] top-1 w-3 h-3 rounded-full bg-slate-300 dark:bg-slate-700 border-4 border-background-light dark:border-background-dark"></div>
+<div>
+<p class="text-sm font-medium">Uploaded <span class="text-primary font-bold italic">Lab Report 4.pdf</span></p>
+<p class="text-[11px] text-slate-500 mt-0.5">Yesterday, 4:15 PM</p>
+</div>
+</div>
+<div class="relative">
+<div class="absolute -left-[21px] top-1 w-3 h-3 rounded-full bg-slate-300 dark:bg-slate-700 border-4 border-background-light dark:border-background-dark"></div>
+<div>
+<p class="text-sm font-medium">Earned badge: <span class="text-primary font-bold italic">Quick Learner</span></p>
+<p class="text-[11px] text-slate-500 mt-0.5">3 days ago</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg border-t border-slate-100 dark:border-slate-800 px-6 py-3 flex items-center justify-between z-50">
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-icons-round">home</span>
+<span class="text-[10px] font-bold">Home</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors">
+<span class="material-icons-round">search</span>
+<span class="text-[10px] font-medium">Search</span>
+</button>
+<!-- Central Upload Button -->
+<button class="relative -top-6 bg-primary text-white w-14 h-14 rounded-full shadow-lg shadow-primary/40 flex items-center justify-center transform active:scale-95 transition-transform border-4 border-background-light dark:border-background-dark">
+<span class="material-icons-round text-3xl">add</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors">
+<span class="material-icons-round">bookmarks</span>
+<span class="text-[10px] font-medium">Saved</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors">
+<span class="material-icons-round">person_outline</span>
+<span class="text-[10px] font-medium">Profile</span>
+</button>
+</nav>
+</body></html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2111d4",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#121022",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<title>Tungsten Learn - Note Detail</title>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden pb-20">
+<!-- Header -->
+<div class="sticky top-0 z-10 flex items-center bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md p-4 justify-between border-b border-primary/10">
+<div class="text-slate-900 dark:text-slate-100 flex size-10 shrink-0 items-center justify-center rounded-lg hover:bg-primary/10 cursor-pointer">
+<span class="material-symbols-outlined">arrow_back</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-tight flex-1 text-center">Note Detail</h2>
+<div class="flex w-10 items-center justify-end">
+<button class="flex size-10 items-center justify-center rounded-lg hover:bg-primary/10 text-slate-900 dark:text-slate-100">
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+</div>
+<!-- PDF Preview Area -->
+<div class="p-4">
+<div class="relative flex flex-col items-center justify-center bg-slate-200 dark:bg-slate-800 aspect-[3/4] rounded-xl overflow-hidden border border-primary/20 shadow-sm" data-alt="A preview image of a formal academic document page" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBIzSkBfYGYbpFtb_-YGzp5f-lxmoPU8F0ZQWK6EjYGSAZ7PRvHTacIm8zVUKm8b3RRA3BYA5dgs-avCriuXB0nMfXuhqMMpCbWIDdD-lN0bm9cBZvEO3vA0Ns0NrrODF7Cb6Oa9wnuv-QEHKXwtoXl4eaSeNlnLvD35b7KvOoisOUq93kmCJRIT26J2PQVVFELred1Ek-YT4m2KXPEbnIV-XSJdTvWFDxqkamC-BQ5z2VMfMCd-0J7fwxjx5RmBAvMHP_jrpoQDg"); background-size: cover; background-position: top;'>
+<div class="absolute inset-0 bg-black/5 flex flex-col items-center justify-center backdrop-blur-[1px]">
+<button class="flex items-center gap-2 rounded-full px-6 py-3 bg-primary text-white font-bold shadow-lg hover:bg-primary/90 transition-all">
+<span class="material-symbols-outlined">fullscreen</span>
+                        View Full PDF
+                    </button>
+</div>
+<!-- Page indicator overlay -->
+<div class="absolute bottom-4 right-4 bg-black/60 text-white text-xs px-3 py-1 rounded-full backdrop-blur-sm">
+                    Page 1 of 12
+                </div>
+</div>
+</div>
+<!-- Title and Stats -->
+<div class="px-4 pt-2">
+<div class="flex justify-between items-start gap-4">
+<h1 class="text-slate-900 dark:text-slate-100 text-2xl font-bold leading-tight flex-1">CSC201 - Data Structures Midterm Review</h1>
+<div class="flex flex-col items-center bg-primary/5 dark:bg-primary/10 p-2 rounded-xl border border-primary/20">
+<button class="text-primary hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">arrow_drop_up</span>
+</button>
+<span class="text-primary font-bold text-sm">482</span>
+<button class="text-slate-400 hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">arrow_drop_down</span>
+</button>
+</div>
+</div>
+<!-- Uploader Info -->
+<div class="flex items-center gap-3 mt-4 py-3 border-y border-primary/10">
+<div class="size-10 rounded-full bg-primary/20 flex items-center justify-center overflow-hidden border border-primary/30">
+<img class="w-full h-full object-cover" data-alt="User profile avatar of a male student" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwhjmgimfrD-UJBjrSzqBokdqV9DpE_MBjeTmXoe8BugqtLib5BwVS7rbM0_i4m2lw2_2Np-lOFVuhIT7JMXnmfhi8NKHtr_RIgVOx18xP3KPeKJ3GoV992c4Baup99OvcJrpjlYsaqd-ryBMNjYM0eXHsKbAjUZUazzE0S7NJn2LxiHC4qEnAf5xJN11Ztpkw8mbue56SE71wqmnV5k6C4U6_zwMFsVCtlWfB9yeNxc0moP6pr4O-TWRXzw_LVbZvPfZsuyDlVA"/>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2">
+<p class="text-slate-900 dark:text-slate-100 font-bold text-sm">Alex Rivera</p>
+<span class="px-2 py-0.5 bg-primary/10 text-primary text-[10px] font-bold rounded-full uppercase tracking-wider">Top Contributor</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-xs">Reputation: <span class="text-primary font-medium">1,240</span> • 2 days ago</p>
+</div>
+<button class="text-primary text-sm font-bold px-4 py-2 rounded-lg border border-primary hover:bg-primary hover:text-white transition-colors">
+                    Follow
+                </button>
+</div>
+</div>
+<!-- Description -->
+<div class="px-4 py-5">
+<h3 class="text-slate-900 dark:text-slate-100 font-bold mb-2">Description</h3>
+<p class="text-slate-600 dark:text-slate-400 text-sm font-normal leading-relaxed">
+                Comprehensive review notes covering Linked Lists, Stacks, Queues, and Trees for the upcoming midterm exam. Includes complexity analysis (Big O), code snippets in Java, and practice problems from previous years.
+            </p>
+<div class="flex flex-wrap gap-2 mt-4">
+<span class="bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-xs px-3 py-1 rounded-full">#ComputerScience</span>
+<span class="bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-xs px-3 py-1 rounded-full">#DataStructures</span>
+<span class="bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-xs px-3 py-1 rounded-full">#Midterm</span>
+</div>
+</div>
+<!-- Real-time Comments Section -->
+<div class="px-4 pt-6 border-t border-primary/10 bg-white/50 dark:bg-slate-900/30">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-slate-900 dark:text-slate-100 font-bold flex items-center gap-2">
+                    Comments 
+                    <span class="bg-primary/10 text-primary text-xs px-2 py-0.5 rounded-full">14</span>
+</h3>
+<div class="flex items-center gap-1 text-primary text-sm font-medium">
+<span class="size-2 bg-green-500 rounded-full animate-pulse"></span>
+                    Live
+                </div>
+</div>
+<!-- Comment Input -->
+<div class="flex gap-3 mb-8">
+<div class="size-8 shrink-0 rounded-full bg-slate-300 dark:bg-slate-700"></div>
+<div class="flex-1 relative">
+<input class="w-full bg-background-light dark:bg-background-dark border border-primary/10 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all" placeholder="Add a public comment..." type="text"/>
+<button class="absolute right-2 top-1/2 -translate-y-1/2 text-primary">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+<!-- Comment List -->
+<div class="space-y-6 pb-8">
+<!-- Single Comment -->
+<div class="flex gap-3">
+<div class="size-8 shrink-0 rounded-full bg-slate-200 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="User profile avatar of a female student" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGGpfcD9xC1CatDHJExcbpiw-yKdrjrvU6lAxBeVoNBZ6gAllacaYLgiwuwO1CMo2nWtXF-OyPyrgrI_bQpeX5NF-dC5T6tYHw8qpPrnbKSdgP_BjF3Ar_jBQp-vqk0Xnmaw362n3oXuiql8dxBpfuRliDHDrqwnIzDQhZjKbp-B50SaOoPyaT_ikMVMM9IzWzigHQ8nNB8lGOCnQ-NzpOR9SPOhQXrx7dJCvAdbwHsrPctUFsQLCwbx0gcF5460YZtj_OoUWyEw"/>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2 mb-1">
+<span class="text-slate-900 dark:text-slate-100 font-bold text-xs">Sarah Chen</span>
+<span class="text-slate-400 text-[10px]">1 hour ago</span>
+</div>
+<p class="text-slate-600 dark:text-slate-400 text-sm">This really helped me understand AVLs! Do you have notes for Graphs as well?</p>
+<div class="flex items-center gap-4 mt-2">
+<button class="flex items-center gap-1 text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">thumb_up</span>
+<span class="text-[10px] font-bold">12</span>
+</button>
+<button class="text-slate-400 hover:text-primary transition-colors text-[10px] font-bold">Reply</button>
+</div>
+</div>
+</div>
+<!-- Single Comment -->
+<div class="flex gap-3">
+<div class="size-8 shrink-0 rounded-full bg-slate-200 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="User profile avatar of a male student wearing glasses" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrKJTscYUMnjv0QDlyi9fS4Rqmhg3m2nyW-8ztgdle-teh2xtGKyeugXbb0e4w50TvU62iMxDADJuEY5f0zvopw6pyp7kHuOpZwpJNyBZOsDyFaidOfBsbx9itl0mqOfdkBrEj8h4ni4F3WD1Oo9w54IvqKLJU8zYOK9ifBSPuOkGMx6Jte8cs_yLbGEl06JQthat0h5Y6IOtwShiLzkNuERYaj2WL-y1aV47vo4O4PkWsNPRNM-OIHRtDW8_5HZ5HLRBsMxaF2A"/>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2 mb-1">
+<span class="text-slate-900 dark:text-slate-100 font-bold text-xs">Marcus Thorne</span>
+<span class="text-slate-400 text-[10px]">3 hours ago</span>
+</div>
+<p class="text-slate-600 dark:text-slate-400 text-sm">Check page 4, I think there's a small typo in the Big O of space complexity for the stack implementation.</p>
+<div class="flex items-center gap-4 mt-2">
+<button class="flex items-center gap-1 text-primary transition-colors">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1">thumb_up</span>
+<span class="text-[10px] font-bold">4</span>
+</button>
+<button class="text-slate-400 hover:text-primary transition-colors text-[10px] font-bold">Reply</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Navigation Bar (Floating Style) -->
+<div class="fixed bottom-0 left-0 right-0 z-20 px-4 pb-4">
+<div class="flex items-center justify-around bg-white/90 dark:bg-background-dark/95 backdrop-blur-lg px-6 py-3 rounded-2xl border border-primary/20 shadow-xl max-w-md mx-auto">
+<a class="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">home</span>
+<p class="text-[10px] font-medium">Home</p>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">search</span>
+<p class="text-[10px] font-medium">Search</p>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">library_books</span>
+<p class="text-[10px] font-bold">Library</p>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<p class="text-[10px] font-medium">Profile</p>
+</a>
+</div>
+</div>
+</div>
+</body></html>

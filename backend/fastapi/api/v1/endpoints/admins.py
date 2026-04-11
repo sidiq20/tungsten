@@ -14,10 +14,30 @@ from core.security import hash_password
 from uuid import UUID
 from datetime import datetime
 
+from sqlalchemy import func
+from schemas.admin import AdminCreate, AdminUpdate, AdminResponse, AdminRegistration, AdminStatsResponse
 from schemas.report import ReportResponse, ReportResolve
 from models.report import Report, ReportStatus
 
 router = APIRouter()
+
+@router.get("/stats", response_model=AdminStatsResponse)
+async def read_admin_stats(
+    current_admin: Admin = Depends(get_current_admin),
+    db: AsyncSession = Depends(get_db)
+):
+    users_count = await db.execute(select(func.count()).select_from(User))
+    posts_count = await db.execute(select(func.count()).select_from(Post))
+    reports_count = await db.execute(select(func.count()).select_from(Report))
+    logs_count = await db.execute(select(func.count()).select_from(AuditLog))
+    
+    return AdminStatsResponse(
+        total_users=users_count.scalar() or 0,
+        total_posts=posts_count.scalar() or 0,
+        total_reports=reports_count.scalar() or 0,
+        total_audit_logs=logs_count.scalar() or 0,
+        system_status="healthy"
+    )
 
 @router.get("/users", response_model=List[UserResponse])
 async def read_users(
@@ -74,6 +94,31 @@ async def unban_user(
     
     await db.commit()
     return {"message": f"User {user_id} has been unbanned"}
+
+@router.patch("/users/{user_id}/reputation", response_model=UserResponse)
+async def adjust_reputation(
+    user_id: UUID,
+    amount: int,
+    current_admin: Admin = Depends(get_current_admin),
+    db: AsyncSession = Depends(get_db)
+):
+    user = await db.get(User, user_id)
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    user.reputation_score += amount
+    
+    audit_log = AuditLog(
+        user_id=current_admin.user_id,
+        action="reputation_adjustment",
+        description=f"Adjusted reputation for user {user_id} by {amount}",
+        metadata_json={"target_user_id": str(user_id), "amount": amount}
+    )
+    db.add(audit_log)
+    
+    await db.commit()
+    await db.refresh(user)
+    return user
 
 @router.get("/reports", response_model=List[ReportResponse])
 async def read_reports(

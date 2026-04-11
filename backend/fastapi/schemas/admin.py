@@ -28,3 +28,10 @@ class AdminResponse(AdminBase):
 
     class Config:
         from_attributes = True
+
+class AdminStatsResponse(BaseModel):
+    total_users: int
+    total_posts: int
+    total_reports: int
+    total_audit_logs: int
+    system_status: str = "healthy"

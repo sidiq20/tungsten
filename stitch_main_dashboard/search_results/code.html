@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Search Results | Tungsten Learn</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2111d4",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#121022",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<!-- Header / Navigation Bar -->
+<header class="sticky top-0 z-50 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+<div class="flex items-center p-4 justify-between max-w-5xl mx-auto">
+<div class="flex items-center gap-3">
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="text-lg font-bold tracking-tight">Search Results</h1>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="size-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center overflow-hidden">
+<img alt="Profile" class="w-full h-full object-cover" data-alt="Student profile avatar placeholder" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKttZ5DZH0mW3rT_auMuES_haid3TcXNYMgBXWL80Z3Id2qyHMRN5iBOfQFzbJGITxrQkhQ9PHSrtwjFoG1w4LX8Baa-TcsZI9JMBXUGEVlPO9JFu_aGvHnLAeBHK7UvhWjLg_ziPq5YSLnGfJSZ3zVb9UwtMyuFkSSvyHpXTZAGnoAnkNhJ29C5UqsVncziMPu3QxjGi_ONTRxhjNGjpVXL3IP2EZqeYCvCE1dF-aYGQBAJJ4iGfGaPHzIRltP3PfX_K1HjQxvQ"/>
+</div>
+</div>
+</div>
+<!-- Search Bar -->
+<div class="px-4 pb-4 max-w-5xl mx-auto">
+<label class="flex flex-col w-full">
+<div class="flex w-full items-stretch rounded-xl h-12 bg-slate-100 dark:bg-slate-800 border border-transparent focus-within:border-primary/50 transition-all">
+<div class="flex items-center justify-center pl-4 text-slate-500">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="flex w-full bg-transparent border-none focus:ring-0 px-4 text-base placeholder:text-slate-500" placeholder="Search notes, courses, or users..." value="Introduction to Psychology"/>
+<div class="flex items-center pr-2">
+<button class="flex items-center justify-center p-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+<span class="material-symbols-outlined">cancel</span>
+</button>
+</div>
+</div>
+</label>
+</div>
+<!-- Category Tabs -->
+<div class="max-w-5xl mx-auto border-b border-slate-200 dark:border-slate-800">
+<div class="flex px-4 gap-8">
+<a class="flex flex-col items-center justify-center border-b-2 border-primary text-primary pb-3 pt-2 px-1 transition-all" href="#">
+<p class="text-sm font-bold">Notes</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-2 border-transparent text-slate-500 dark:text-slate-400 pb-3 pt-2 px-1 hover:text-slate-900 dark:hover:text-slate-100" href="#">
+<p class="text-sm font-bold">Courses</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-2 border-transparent text-slate-500 dark:text-slate-400 pb-3 pt-2 px-1 hover:text-slate-900 dark:hover:text-slate-100" href="#">
+<p class="text-sm font-bold">Users</p>
+</a>
+</div>
+</div>
+</header>
+<!-- Content Area -->
+<main class="max-w-5xl mx-auto p-4 pb-24">
+<!-- Quick Filters Horizontal Scroll -->
+<div class="flex gap-3 pb-6 overflow-x-auto no-scrollbar">
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-primary text-white px-4 text-sm font-medium">
+                All Levels
+                <span class="material-symbols-outlined text-[18px]">expand_more</span>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-4 text-sm font-medium">
+                Most Popular
+                <span class="material-symbols-outlined text-[18px]">expand_more</span>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-4 text-sm font-medium">
+                Study Guides
+            </button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-4 text-sm font-medium">
+                Past Exams
+            </button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-4 text-sm font-medium">
+                Flashcards
+            </button>
+</div>
+<!-- Results Info -->
+<div class="flex justify-between items-center mb-6">
+<p class="text-slate-500 dark:text-slate-400 text-sm">Showing 124 results for <span class="text-slate-900 dark:text-slate-100 font-semibold italic">"Introduction to Psychology"</span></p>
+<button class="flex items-center gap-1 text-primary text-sm font-bold">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+                Refine
+            </button>
+</div>
+<!-- Note Results List -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Result Card 1 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-4 hover:shadow-lg transition-shadow cursor-pointer flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-primary/10 text-primary">100 Level</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-600">Verified</span>
+</div>
+<button class="text-slate-400 hover:text-primary"><span class="material-symbols-outlined">bookmark</span></button>
+</div>
+<div>
+<h3 class="font-bold text-lg leading-tight mb-1">Psychology 101: Complete Semester Summary</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400">Cognitive &amp; Behavioral Neuroscience Focus</p>
+</div>
+<div class="flex items-center gap-3 py-2">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
+<img alt="Uploader" class="w-full h-full object-cover" data-alt="University student profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCg6yLm8T4RH9AL6kZumWPHlzpB00BXQKbmCo-hBeliAEjqC0DR3hzrb2zZNCAoB_GWsJJ3BWD0oLqZLkLJe1IvcBTzMTbY_70iSCaM-D3k_YvyhhCwdE3l3PynizbPhWH480iV40iGEhSPUExJPysto5yXJiCn8NUDQBW2dyANYcuN_kLAjSlIJQAVq5lgCJFzcT5FhU9wO0tzUlaTn8UGKRwr471LqeL92fNn-Eoi11vh-R6uY3cA9RRHvi7rmrUi-OIakb0g6g"/>
+</div>
+<div class="flex flex-col">
+<p class="text-xs font-bold">Sarah Jenkins</p>
+<p class="text-[10px] text-slate-400 uppercase tracking-tighter">Stanford University</p>
+</div>
+</div>
+<div class="flex items-center justify-between border-t border-slate-100 dark:border-slate-800 pt-3">
+<div class="flex gap-4">
+<div class="flex items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined text-[18px]">thumb_up</span>
+<span class="text-xs font-medium">1.2k</span>
+</div>
+<div class="flex items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+<span class="text-xs font-medium">4.5k</span>
+</div>
+</div>
+<p class="text-[10px] text-slate-400">Uploaded 2 days ago</p>
+</div>
+</div>
+<!-- Result Card 2 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-4 hover:shadow-lg transition-shadow cursor-pointer flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-primary/10 text-primary">200 Level</span>
+</div>
+<button class="text-slate-400 hover:text-primary"><span class="material-symbols-outlined">bookmark</span></button>
+</div>
+<div>
+<h3 class="font-bold text-lg leading-tight mb-1">Abnormal Psychology: Midterm Prep Pack</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400">Case studies and major disorders summary</p>
+</div>
+<div class="flex items-center gap-3 py-2">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
+<img alt="Uploader" class="w-full h-full object-cover" data-alt="Student uploader profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCI-GztsApx5Cc_3nz3B1kuS2nPl-i_-1Z4KeHgEgLZrLwihgVAmIfPYwDumLAkGPu1oqORxlZXBXPSLquYL-gg3_J39nNDayhVvVB_6HUaIkdOHAeYe6HuOxohIydnN2mqFyrORI4iw1s-6wPKGocmlR6K7UoyKC7MNkwrfFrM7phlGiyS7Rl5-1lEtsM1Vn-E9GnDkQO3KS1gZFfGM1dtMw3fpiUN1ELZiem-xNu5nMU1-YGgnwpiRCiormQxs7MT3QzJ9oIQPQ"/>
+</div>
+<div class="flex flex-col">
+<p class="text-xs font-bold">David Chen</p>
+<p class="text-[10px] text-slate-400 uppercase tracking-tighter">NYU Psychology</p>
+</div>
+</div>
+<div class="flex items-center justify-between border-t border-slate-100 dark:border-slate-800 pt-3">
+<div class="flex gap-4">
+<div class="flex items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined text-[18px]">thumb_up</span>
+<span class="text-xs font-medium">856</span>
+</div>
+<div class="flex items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+<span class="text-xs font-medium">2.1k</span>
+</div>
+</div>
+<p class="text-[10px] text-slate-400">Uploaded 1 week ago</p>
+</div>
+</div>
+<!-- Result Card 3 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-4 hover:shadow-lg transition-shadow cursor-pointer flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-primary/10 text-primary">100 Level</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-orange-500/10 text-orange-600">Flashcards</span>
+</div>
+<button class="text-slate-400 hover:text-primary"><span class="material-symbols-outlined">bookmark</span></button>
+</div>
+<div>
+<h3 class="font-bold text-lg leading-tight mb-1">Psych Terminology &amp; Key Theories</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400">Quick-study cards for final exam</p>
+</div>
+<div class="flex items-center gap-3 py-2">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
+<img alt="Uploader" class="w-full h-full object-cover" data-alt="Young scholar profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzvZCkN_3fhhT82kwILorwv_hnCQAt7KwUoFaB9WvKHoJar0GBgqM7bYZYGXgQ06mePDL3KUApXuBXRTfxRY284tS3t8vNy5vjTIQ1F7tGVfcZYF7WdRV8QlNbiOBl8Vent4sPQn0G-7e2JCcbfk75QHjys3_l90FvvflgLcpUbtD3i6fOU2IcEeGQa4yi_z5TKHMRdKMl5KaKWJJy223v4ji5rpeP9tw8gsqaIbBAftzddYZaL8pLxebuUVXWF2Yn_TtiXDtntQ"/>
+</div>
+<div class="flex flex-col">
+<p class="text-xs font-bold">Maria Garcia</p>
+<p class="text-[10px] text-slate-400 uppercase tracking-tighter">UC Berkeley</p>
+</div>
+</div>
+<div class="flex items-center justify-between border-t border-slate-100 dark:border-slate-800 pt-3">
+<div class="flex gap-4">
+<div class="flex items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined text-[18px]">thumb_up</span>
+<span class="text-xs font-medium">2.4k</span>
+</div>
+<div class="flex items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+<span class="text-xs font-medium">12k</span>
+</div>
+</div>
+<p class="text-[10px] text-slate-400">Uploaded 1 month ago</p>
+</div>
+</div>
+<!-- Result Card 4 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-4 hover:shadow-lg transition-shadow cursor-pointer flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-primary/10 text-primary">300 Level</span>
+</div>
+<button class="text-slate-400 hover:text-primary"><span class="material-symbols-outlined">bookmark</span></button>
+</div>
+<div>
+<h3 class="font-bold text-lg leading-tight mb-1">Developmental Psychology: Infancy to Adulthood</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400">Detailed lecture notes with diagrams</p>
+</div>
+<div class="flex items-center gap-3 py-2">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
+<img alt="Uploader" class="w-full h-full object-cover" data-alt="Graduate student uploader" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJrhSWbrYPm7XskyGWacBraMexfMsIkzhdX7WBpcdXa5Cts0-1gEnfmg6MzppllEtxinA7sWFmdXscNyLPoEN94va-pbMMmZU12iulsfygiDkh8eRZbM3E9Oll_83pPdKLFajpbPTpGP6bVbf42cIrz4E7GmCpRm6rscNpGVTMNVjNWBR-RkpSH5SPtSM-E5p3DFVKIGUa4qtOE2dHVf9Gj8vW7HqJEf3KC3ub8WTZF6lXyiCAe6jUR1ttOrvIwx9J3_smzR-RwA"/>
+</div>
+<div class="flex flex-col">
+<p class="text-xs font-bold">James Wilson</p>
+<p class="text-[10px] text-slate-400 uppercase tracking-tighter">UCL Psychology</p>
+</div>
+</div>
+<div class="flex items-center justify-between border-t border-slate-100 dark:border-slate-800 pt-3">
+<div class="flex gap-4">
+<div class="flex items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined text-[18px]">thumb_up</span>
+<span class="text-xs font-medium">412</span>
+</div>
+<div class="flex items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+<span class="text-xs font-medium">1.5k</span>
+</div>
+</div>
+<p class="text-[10px] text-slate-400">Uploaded 3 days ago</p>
+</div>
+</div>
+</div>
+<!-- Load More Button -->
+<div class="mt-8 flex justify-center">
+<button class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-6 py-2 rounded-xl text-sm font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+                Load more results
+            </button>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full bg-white/95 dark:bg-background-dark/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 pb-safe">
+<div class="flex gap-2 px-4 pb-3 pt-2 max-w-5xl mx-auto">
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-400" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined">home</span>
+</div>
+<p class="text-[10px] font-medium leading-normal">Home</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-primary" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">search</span>
+</div>
+<p class="text-[10px] font-medium leading-normal">Search</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-400" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined">library_books</span>
+</div>
+<p class="text-[10px] font-medium leading-normal">Library</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-slate-400" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined">person</span>
+</div>
+<p class="text-[10px] font-medium leading-normal">Profile</p>
+</a>
+</div>
+</nav>
+</body></html>

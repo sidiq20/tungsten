@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login | Tungsten Learn</title>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error-container": "#fee2e2",
+                        "primary-fixed-dim": "#c1c1ff",
+                        "on-surface": "#0f172a",
+                        "error": "#ef4444",
+                        "surface": "#ffffff",
+                        "on-tertiary-container": "#ff907b",
+                        "on-error-container": "#991b1b",
+                        "outline": "#cbd5e1",
+                        "primary": "#2111d4",
+                        "on-primary-fixed-variant": "#271cd8",
+                        "on-secondary-fixed": "#0e0b5d",
+                        "background": "#f6f6f8",
+                        "on-error": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "primary-container": "#e0e7ff",
+                        "on-surface-variant": "#475569",
+                        "primary-fixed": "#e1dfff",
+                        "tertiary-fixed-dim": "#ffb4a6",
+                        "surface-tint": "#2111d4",
+                        "inverse-primary": "#c1c1ff",
+                        "on-tertiary-fixed": "#3f0300",
+                        "secondary-fixed": "#e1dfff",
+                        "surface-container-high": "#e9e6f4",
+                        "surface-container-highest": "#e4e1ef",
+                        "inverse-surface": "#1e293b",
+                        "tertiary-fixed": "#ffdad4",
+                        "tertiary-container": "#870d00",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed": "#08006c",
+                        "on-secondary-container": "#0f172a",
+                        "on-secondary-fixed-variant": "#3d3e89",
+                        "secondary": "#475569",
+                        "surface-container": "#f6f6f8",
+                        "surface-bright": "#ffffff",
+                        "surface-variant": "#f1f5f9",
+                        "on-tertiary-fixed-variant": "#8e1303",
+                        "outline-variant": "#e2e8f0",
+                        "on-primary-container": "#2111d4",
+                        "inverse-on-surface": "#f2effd",
+                        "on-primary": "#ffffff",
+                        "on-background": "#0f172a",
+                        "surface-container-low": "#f5f2ff",
+                        "surface-dim": "#dbd8e6",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#f1f5f9",
+                        "secondary-fixed-dim": "#c1c1ff",
+                        "tertiary": "#5e0600"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Lexend"],
+                        "body": ["Lexend"],
+                        "label": ["Lexend"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Lexend', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-surface-container text-on-surface min-h-screen flex flex-col">
+<!-- TopAppBar suppressed due to "The Destination Rule": Login is a focused transactional screen -->
+<main class="flex-grow flex items-center justify-center px-4 py-12 relative overflow-hidden">
+<!-- Abstract Academic Background Elements -->
+<div class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
+<div class="absolute top-[-10%] left-[-5%] w-[40%] h-[40%] bg-primary/5 rounded-full blur-3xl"></div>
+<div class="absolute bottom-[-10%] right-[-5%] w-[40%] h-[40%] bg-indigo-500/5 rounded-full blur-3xl"></div>
+</div>
+<div class="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-0 bg-surface-container-lowest rounded-[2rem] shadow-2xl shadow-primary/10 overflow-hidden">
+<!-- Branding & Visual Side -->
+<div class="hidden md:flex flex-col justify-between p-12 bg-indigo-50 relative">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+</div>
+<span class="text-xl font-black text-primary tracking-tighter uppercase">Tungsten Learn</span>
+</div>
+<div class="space-y-6">
+<div class="relative">
+<!-- Image Container with Asymmetry -->
+<div class="rounded-3xl overflow-hidden shadow-xl rotate-2 hover:rotate-0 transition-transform duration-500">
+<img alt="Academic Excellence" class="w-full h-64 object-cover" data-alt="Modern university library interior with large windows, wooden desks, and students studying in a quiet academic atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdrRSzB5KScfi6_izcq1GruoPKcI7d9G12P54g8pmtc9y24GSexaoi-ynecic91R9mI5G9I17Y-T2pSTaKSNsqTDqgt4XE3EJ2MnQ--M1reO9QZ7H-PNwyQUeosi_mawQvAySzP4OlJr_4wSPmtnCSSl7sm69OzODLhvsvv5HzCicwe54zzr5Qp0lkcciodmBLWM_OpoBT3iGJh5fSGLNXBBlTDdm0iGib2t9cSKaipeA2zzmi2a4qirivCQfNbThlGj0ZX2O6xw"/>
+</div>
+<!-- Floating Badge -->
+<div class="absolute -bottom-4 -right-4 bg-white p-4 rounded-2xl shadow-xl flex items-center gap-2 border border-slate-100">
+<div class="w-8 h-8 bg-green-100 text-green-700 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-sm" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<div>
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Status</p>
+<p class="text-sm font-bold text-slate-900">University Verified</p>
+</div>
+</div>
+</div>
+<div class="pt-8">
+<h2 class="text-3xl font-black text-on-surface tracking-tighter leading-tight">
+                            Elevate your <span class="text-primary">academic journey</span> through collaborative focus.
+                        </h2>
+<p class="mt-4 text-secondary leading-relaxed max-w-sm">
+                            Access your research, notes, and study groups with the world's most trusted academic platform.
+                        </p>
+</div>
+</div>
+<div class="text-xs font-bold text-slate-400 flex gap-4 uppercase tracking-widest">
+<span>Research</span>
+<span>•</span>
+<span>Collab</span>
+<span>•</span>
+<span>Excellence</span>
+</div>
+</div>
+<!-- Login Form Side -->
+<div class="p-8 md:p-16 flex flex-col justify-center">
+<div class="md:hidden flex items-center gap-3 mb-12">
+<div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+</div>
+<span class="text-xl font-black text-primary tracking-tighter uppercase">Tungsten Learn</span>
+</div>
+<div class="mb-10">
+<h1 class="text-4xl font-black text-on-surface tracking-tighter mb-2">Welcome Back</h1>
+<p class="text-secondary font-medium">Continue your scholarly pursuits.</p>
+</div>
+<form class="space-y-6">
+<div>
+<label class="block text-sm font-bold text-on-surface-variant mb-2 px-1" for="email">University Email</label>
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="alternate_email">alternate_email</span>
+</div>
+<input class="block w-full pl-11 pr-4 py-4 bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-primary rounded-xl transition-all duration-200 placeholder:text-slate-400 text-on-surface font-medium" id="email" name="email" placeholder="name@university.edu" required="" type="email"/>
+</div>
+</div>
+<div>
+<div class="flex justify-between items-center mb-2 px-1">
+<label class="block text-sm font-bold text-on-surface-variant" for="password">Password</label>
+<a class="text-sm font-bold text-primary hover:underline transition-all" href="#">Forgot Password?</a>
+</div>
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="lock">lock</span>
+</div>
+<input class="block w-full pl-11 pr-4 py-4 bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-primary rounded-xl transition-all duration-200 placeholder:text-slate-400 text-on-surface font-medium" id="password" name="password" placeholder="••••••••" required="" type="password"/>
+</div>
+</div>
+<div class="flex items-center gap-2 px-1">
+<input class="w-5 h-5 rounded-md border-slate-300 text-primary focus:ring-primary" id="remember" type="checkbox"/>
+<label class="text-sm font-bold text-on-surface-variant select-none cursor-pointer" for="remember">Remember this session</label>
+</div>
+<button class="w-full bg-primary text-white py-4 px-6 rounded-xl font-bold text-lg shadow-lg shadow-primary/20 hover:bg-primary-fixed-variant active:scale-95 transition-all duration-200 flex items-center justify-center gap-2" type="submit">
+<span>Sign In</span>
+<span class="material-symbols-outlined text-[20px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</form>
+<div class="mt-12 text-center">
+<p class="text-secondary font-medium">
+                        New to Tungsten Learn? 
+                        <a class="text-primary font-bold hover:underline ml-1" href="#">Create an account</a>
+</p>
+</div>
+<div class="mt-12 pt-8 border-t border-slate-100">
+<p class="text-center text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-loose">
+                        Institutional access only. By signing in, you agree to our Academic Integrity Policy.
+                    </p>
+</div>
+</div>
+</div>
+</main>
+<footer class="bg-slate-50 dark:bg-slate-950">
+<div class="max-w-7xl mx-auto px-8 py-12 flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="font-lexend text-sm leading-relaxed text-slate-500 dark:text-slate-500">
+                © 2024 Tungsten Learn. Academic Excellence.
+            </div>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="font-lexend text-sm leading-relaxed text-slate-500 dark:text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-300 underline transition-colors duration-200" href="#">
+                © 2024 Tungsten Learn. Academic Excellence.
+            </a>
+<a class="font-lexend text-sm leading-relaxed text-slate-500 dark:text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-300 underline transition-colors duration-200" href="#">
+                © 2024 Tungsten Learn. Academic Excellence.
+            </a>
+<a class="font-lexend text-sm leading-relaxed text-slate-500 dark:text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-300 underline transition-colors duration-200" href="#">
+                © 2024 Tungsten Learn. Academic Excellence.
+            </a>
+</div>
+</div>
+</footer>
+</body></html>

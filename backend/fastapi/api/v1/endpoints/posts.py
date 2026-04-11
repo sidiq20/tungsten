@@ -5,7 +5,7 @@ from sqlalchemy.orm import joinedload
 from typing import List, Optional, Any
 from uuid import UUID
 
-from api.dependencies import get_db, get_current_user, get_redis
+from api.dependencies import get_db, get_current_user, get_redis, get_current_user_optional
 from redis.asyncio import Redis
 import json
 from models.post import Post, PostStatus
@@ -107,11 +107,18 @@ async def read_posts(
     course_id: Optional[UUID] = None,
     tag: Optional[str] = None,
     search: Optional[str] = None,
+    post_type: Optional[str] = None, # "note" or "question"
     sort_by: str = "recent", 
+    current_user: Optional[User] = Depends(get_current_user_optional),
     db: AsyncSession = Depends(get_db)
 ):
     skip = (page - 1) * limit
     query = select(Post).where(Post.status == PostStatus.PUBLISHED)
+    
+    if post_type == "note":
+        query = query.where(Post.file_url.isnot(None))
+    elif post_type == "question":
+        query = query.where(Post.file_url.is_(None))
     
     if course_id:
         query = query.where(Post.course_id == course_id)
@@ -141,6 +148,33 @@ async def read_posts(
     result = await db.execute(query.offset(skip).limit(limit))
     items = result.unique().scalars().all()
     
+    # Populate user-specific fields
+    for item in items:
+        setattr(item, 'is_bookmarked', False)
+        setattr(item, 'user_vote', None)
+        
+    if current_user:
+        for item in items:
+            # Check bookmark
+            from models.bookmark import user_bookmarks
+            bookmark_check = await db.execute(
+                select(user_bookmarks).where(
+                    (user_bookmarks.c.user_id == current_user.id) & 
+                    (user_bookmarks.c.post_id == item.id)
+                )
+            )
+            setattr(item, 'is_bookmarked', bookmark_check.first() is not None)
+            
+            # Check vote
+            vote_check = await db.execute(
+                select(Vote.value).where(
+                    (Vote.user_id == current_user.id) & 
+                    (Vote.target_id == item.id) & 
+                    (Vote.target_type == "post")
+                )
+            )
+            setattr(item, 'user_vote', vote_check.scalar())
+    
     return PaginatedPostResponse(
         total=total,
         page=page,
@@ -151,6 +185,7 @@ async def read_posts(
 @router.get("/{post_id}", response_model=PostResponse)
 async def read_post(
     post_id: UUID,
+    current_user: Optional[User] = Depends(get_current_user_optional),
     db: AsyncSession = Depends(get_db)
 ):
     result = await db.execute(
@@ -165,15 +200,32 @@ async def read_post(
       
     post.view_count += 1
     db.add(post)
-    await db.commit()
     
- 
-    result = await db.execute(
-        select(Post)
-        .options(joinedload(Post.tags), joinedload(Post.course))
-        .where(Post.id == post_id)
-    )
-    post = result.unique().scalar_one()
+    # Populate user-specific fields
+    setattr(post, 'is_bookmarked', False)
+    setattr(post, 'user_vote', None)
+    
+    if current_user:
+        from models.bookmark import user_bookmarks
+        bookmark_check = await db.execute(
+            select(user_bookmarks).where(
+                (user_bookmarks.c.user_id == current_user.id) & 
+                (user_bookmarks.c.post_id == post_id)
+            )
+        )
+        setattr(post, 'is_bookmarked', bookmark_check.first() is not None)
+            
+        vote_check = await db.execute(
+            select(Vote.value).where(
+                (Vote.user_id == current_user.id) & 
+                (Vote.target_id == post_id) & 
+                (Vote.target_type == "post")
+            )
+        )
+        setattr(post, 'user_vote', vote_check.scalar())
+
+    await db.commit()
+    await db.refresh(post)
     
     return post
 

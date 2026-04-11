@@ -45,6 +45,9 @@ class PostResponse(PostBase):
     
     course: Optional[CourseResponse] = None
     tags: List[TagResponse] = []
+    
+    is_bookmarked: bool = False
+    user_vote: Optional[int] = None
 
     class Config:
         from_attributes = True

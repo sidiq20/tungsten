@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tungsten Learn</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2111d4",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#121022",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="max-w-md mx-auto bg-white dark:bg-slate-900 min-h-screen shadow-xl flex flex-col">
+<!-- Header -->
+<div class="flex items-center bg-white dark:bg-slate-900 p-4 sticky top-0 z-10 border-b border-slate-100 dark:border-slate-800 justify-between">
+<div class="text-slate-900 dark:text-slate-100 flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer">
+<span class="material-symbols-outlined">arrow_back</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-tight flex-1 text-center">Tungsten Learn</h2>
+<div class="flex w-10 items-center justify-end">
+<button class="flex size-10 cursor-pointer items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-900 dark:text-slate-100 transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto pb-24">
+<!-- Profile Header Section -->
+<div class="flex p-6 flex-col items-center">
+<div class="relative">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full min-h-28 w-28 border-4 border-primary/20" data-alt="Student profile photo with friendly expression" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDDvxPix7m4DSJMZnQzdZlR_d8rfysALWoEWq5C6ihLhvpPH-9Y3eHCGp3RXRuGXJPyiHiF70KzA0Qsep_Qhw9FyGx-sHQCyfJnMZLFhsKgYfpEzhkeAPc6ViCovXM9D-fN38mkfcXp1WgUjvaRBKOIBOPW42F2cAER3ynjnnB7bbqbO1LHdtwMrjT7dajP4RBOYyDX1X1gqVlFtX-XFPRSxbai8vZkdJ10DJ8c9x6_69JOUBuSO3uhdzMmYOuAeh9bh1cpYwo_Xw");'>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-primary text-white text-[10px] font-bold px-2 py-1 rounded-full border-2 border-white dark:border-slate-900">
+                        LVL 12
+                    </div>
+</div>
+<div class="mt-4 text-center">
+<h1 class="text-slate-900 dark:text-slate-100 text-2xl font-bold tracking-tight">Alex Johnson</h1>
+<p class="text-primary font-semibold text-sm">Knowledge Seeker</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs mt-1">Top 5% contributors this month</p>
+</div>
+</div>
+<!-- XP Progress Card -->
+<div class="px-4 mb-6">
+<div class="bg-primary/5 dark:bg-primary/10 rounded-xl p-5 border border-primary/10">
+<div class="flex justify-between items-end mb-3">
+<div>
+<p class="text-xs uppercase tracking-wider font-bold text-primary/70">Next Rank</p>
+<h3 class="text-slate-900 dark:text-slate-100 font-bold text-lg leading-none mt-1">Master Scholar</h3>
+</div>
+<p class="text-primary font-bold text-sm">1,500 / 2,000 XP</p>
+</div>
+<div class="h-3 w-full bg-primary/20 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full transition-all" style="width: 75%;"></div>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-[11px] mt-3 flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">auto_awesome</span>
+                        500 XP more to reach Level 13
+                    </p>
+</div>
+</div>
+<!-- Reputation Breakdown -->
+<div class="px-4 mb-8">
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold mb-4 px-1">Reputation Breakdown</h2>
+<div class="space-y-3">
+<div class="flex items-center gap-4 p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-100 dark:border-slate-700 shadow-sm">
+<div class="size-10 flex items-center justify-center rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-600">
+<span class="material-symbols-outlined">description</span>
+</div>
+<div class="flex-1">
+<p class="font-bold text-sm">Notes Shared</p>
+<p class="text-xs text-slate-500">24 sets uploaded</p>
+</div>
+<div class="text-right">
+<p class="font-bold text-primary">+850</p>
+<p class="text-[10px] text-slate-400">XP Earned</p>
+</div>
+</div>
+<div class="flex items-center gap-4 p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-100 dark:border-slate-700 shadow-sm">
+<div class="size-10 flex items-center justify-center rounded-lg bg-green-100 dark:bg-green-900/30 text-green-600">
+<span class="material-symbols-outlined">forum</span>
+</div>
+<div class="flex-1">
+<p class="font-bold text-sm">Helpful Comments</p>
+<p class="text-xs text-slate-500">142 community answers</p>
+</div>
+<div class="text-right">
+<p class="font-bold text-primary">+420</p>
+<p class="text-[10px] text-slate-400">XP Earned</p>
+</div>
+</div>
+<div class="flex items-center gap-4 p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-100 dark:border-slate-700 shadow-sm">
+<div class="size-10 flex items-center justify-center rounded-lg bg-amber-100 dark:bg-amber-900/30 text-amber-600">
+<span class="material-symbols-outlined">volunteer_activism</span>
+</div>
+<div class="flex-1">
+<p class="font-bold text-sm">Peer Thanks</p>
+<p class="text-xs text-slate-500">56 direct thank-yous</p>
+</div>
+<div class="text-right">
+<p class="font-bold text-primary">+230</p>
+<p class="text-[10px] text-slate-400">XP Earned</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Milestones / Badges -->
+<div class="px-4 mb-8">
+<div class="flex justify-between items-center mb-4 px-1">
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold">Milestones</h2>
+<a class="text-primary text-xs font-bold hover:underline" href="#">View All</a>
+</div>
+<div class="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+<div class="flex-shrink-0 w-24 flex flex-col items-center gap-2 group">
+<div class="size-16 rounded-full bg-primary flex items-center justify-center text-white shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-3xl">upload_file</span>
+</div>
+<p class="text-[10px] font-bold text-center leading-tight">First Upload</p>
+</div>
+<div class="flex-shrink-0 w-24 flex flex-col items-center gap-2">
+<div class="size-16 rounded-full bg-amber-400 flex items-center justify-center text-white shadow-lg shadow-amber-400/20">
+<span class="material-symbols-outlined text-3xl">thumb_up</span>
+</div>
+<p class="text-[10px] font-bold text-center leading-tight">100 Upvotes</p>
+</div>
+<div class="flex-shrink-0 w-24 flex flex-col items-center gap-2">
+<div class="size-16 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-slate-400">
+<span class="material-symbols-outlined text-3xl">calendar_month</span>
+</div>
+<p class="text-[10px] font-bold text-center leading-tight text-slate-400">30 Day Streak</p>
+</div>
+<div class="flex-shrink-0 w-24 flex flex-col items-center gap-2">
+<div class="size-16 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-slate-400">
+<span class="material-symbols-outlined text-3xl">emoji_events</span>
+</div>
+<p class="text-[10px] font-bold text-center leading-tight text-slate-400">Top Monthly</p>
+</div>
+</div>
+</div>
+<!-- Weekly Leaderboard Preview -->
+<div class="px-4 mb-8">
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold mb-4 px-1">Weekly Leaderboard</h2>
+<div class="bg-white dark:bg-slate-800 rounded-xl overflow-hidden border border-slate-100 dark:border-slate-700">
+<div class="flex items-center gap-3 p-3 border-b border-slate-50 dark:border-slate-700/50">
+<span class="text-slate-400 font-bold w-6 text-center text-xs">4</span>
+<div class="size-8 rounded-full bg-slate-200 overflow-hidden" data-alt="Leaderboard user avatar">
+<img alt="Sarah L." data-alt="Female student smiling profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6p57flhnuPEauMruIl7nHR5VZkwEpinGkRhqj0m4ZeTcg87coMoV43Zl4xw1MwnyHUGn-oozEzWTtIC6BYP7TcEye1NxT7RueCCFAEWu8UtKdyyul66AfRc2tifzw1tT22V-3-T-2Mhg5h8VpCXLdR50liEc3CfJVpCktmYrjXstL-nOGJKX82mscK9qxtofoqEuSTirUbWjJOPpjrkMAT5WDRNqb_SxBolagSDdHDAzLS1YnixX5Pog4WUtSHc43htdobbPZkQ"/>
+</div>
+<p class="flex-1 text-sm font-medium">Sarah L.</p>
+<p class="text-xs font-bold">1,840 XP</p>
+</div>
+<div class="flex items-center gap-3 p-3 bg-primary/10 border-y-2 border-primary/20">
+<span class="text-primary font-black w-6 text-center text-sm">5</span>
+<div class="size-8 rounded-full border-2 border-primary overflow-hidden" data-alt="Current user avatar">
+<img alt="You" data-alt="Student profile photo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFNDzEMjjB7oXAvxc92_cClt5zdlm1qCBQQmDYi7k3VRYm7vVG6y92YW9ceVA0ZNOpKrgurvIfqLJpxEseo4qwMzaOVz5aBWu9iiACusvRGB1SobGODM-CZFLeUhEXAkRCVQHuahq9Jb3eikKsdm-b2Bk9xqykhHyBwK50SUhX1CAYqmi5bvxeePzhHem6Du61MPqm6PlvkpDWuAVwbNctsxiRy6jHwefgx8HfdxZppAc_LAjS610dF4rnSgLClIn-g3K0OwLWPA"/>
+</div>
+<p class="flex-1 text-sm font-bold text-primary">You</p>
+<p class="text-xs font-black text-primary">1,500 XP</p>
+</div>
+<div class="flex items-center gap-3 p-3 border-t border-slate-50 dark:border-slate-700/50">
+<span class="text-slate-400 font-bold w-6 text-center text-xs">6</span>
+<div class="size-8 rounded-full bg-slate-200 overflow-hidden" data-alt="Leaderboard user avatar">
+<img alt="David K." data-alt="Male student profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC13ePyN3t93gDUFeZyeiBROjnZDd5whYO1akE3G6ZpARTcNdGcOx2TUz7KY8GNieFLsj1Dh9m0_4aZeSKaik99FYKkjgozC1t7PBfZYtVrf8Hu58wUYoecZALnFfLIpG2FDM7PtwpAMhFHbgE0rkQv3gOV-Puf4K5GaOfS15J2s9xPGOJ-jBRK-WD69wBa93vh7nNJrqaDbZw_RL51ZmQp8cDlLi7J2sbcEWzcsypIQ-dYZUK3KcLjIZ1dnSq76Byfwz_SNBrq2w"/>
+</div>
+<p class="flex-1 text-sm font-medium">David K.</p>
+<p class="text-xs font-bold">1,480 XP</p>
+</div>
+</div>
+<button class="w-full mt-4 py-3 bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-bold text-xs rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
+                    FULL LEADERBOARD
+                </button>
+</div>
+</div>
+<!-- Bottom Navigation Bar -->
+<div class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-100 dark:border-slate-800 flex justify-around items-center px-4 pb-4 pt-3">
+<a class="flex flex-col items-center gap-1 text-slate-400 transition-colors" href="#">
+<span class="material-symbols-outlined">home</span>
+<p class="text-[10px] font-medium">Home</p>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 transition-colors" href="#">
+<span class="material-symbols-outlined">book_4</span>
+<p class="text-[10px] font-medium">Study</p>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary transition-colors" href="#">
+<span class="material-symbols-outlined font-black">emoji_events</span>
+<p class="text-[10px] font-bold">Reputation</p>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+<p class="text-[10px] font-medium">Profile</p>
+</a>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2111d4",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#121022",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<title>Tungsten Learn - Collaborative Learning Platform</title>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<header class="sticky top-0 z-50 w-full border-b border-primary/10 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md">
+<div class="container mx-auto flex h-16 items-center justify-between px-4">
+<div class="flex items-center gap-2">
+<div class="flex size-10 items-center justify-center rounded-lg bg-primary text-white">
+<span class="material-symbols-outlined">school</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight text-primary">Tungsten Learn</h1>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Features</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">University Network</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Resource Hub</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="text-sm font-bold text-slate-600 dark:text-slate-400 hover:text-primary">Login</button>
+<button class="hidden sm:flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-bold text-white transition-opacity hover:opacity-90">
+                    Get Started
+                </button>
+</div>
+</div>
+</header>
+<main class="flex flex-col">
+<section class="container mx-auto px-4 py-12 @container lg:py-24">
+<div class="grid grid-cols-1 gap-12 @[864px]:grid-cols-2 items-center">
+<div class="flex flex-col gap-8">
+<div class="flex flex-col gap-4">
+<span class="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-primary">
+                            Now at 50+ Universities
+                        </span>
+<h1 class="text-4xl font-black leading-tight tracking-tight text-slate-900 dark:text-white @[480px]:text-6xl">
+                            Learn together, <br/><span class="text-primary">study smarter.</span>
+</h1>
+<p class="max-w-[540px] text-lg leading-relaxed text-slate-600 dark:text-slate-400">
+                            The #1 note-sharing platform for your university. Access verified course materials, lecture summaries, and collaborate with peers effortlessly.
+                        </p>
+</div>
+<div class="flex flex-col gap-3 sm:flex-row">
+<button class="flex h-14 items-center justify-center gap-2 rounded-xl bg-primary px-8 text-base font-bold text-white shadow-lg shadow-primary/20 transition-transform active:scale-95">
+<span class="material-symbols-outlined">mail</span>
+                            Sign Up with University Email
+                        </button>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex -space-x-3">
+<div class="size-10 rounded-full border-2 border-white bg-slate-200" data-alt="Portrait of a smiling college student"></div>
+<div class="size-10 rounded-full border-2 border-white bg-slate-300" data-alt="Portrait of a diverse university student"></div>
+<div class="size-10 rounded-full border-2 border-white bg-slate-400" data-alt="Portrait of a focused engineering student"></div>
+</div>
+<p class="text-sm font-medium text-slate-500">Joined by 12,000+ students this semester</p>
+</div>
+</div>
+<div class="relative">
+<div class="aspect-square w-full rounded-3xl bg-primary/5 p-4 @[480px]:p-8">
+<div class="h-full w-full rounded-2xl bg-cover bg-center shadow-2xl" data-alt="Group of diverse students studying together in a modern library" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC6SFz5CEcxvUo9JQsfIMG2regtd-2Ob_BdbunlkzDW8AJwzBedTGSqHBXw--Rf8xtmIZavOp59pbOGuiCxJYfDgCuXDqfdn0zyFv9FANS4JC0VlQ4H3QGvtvJW_vAy-zhNr5tfcJJaVxs5TxEc641i2FRZQdE0OCm9G0JSc2Sd8tNqGYPCEbHDzrQc_wU9q1hTSvAmHmiAV3oeUpHp0B8D0spjMEp6YFXe9QOtiMA5L14jvF0mTY76BYycGXUUMBJq0HC-vfdchg');">
+</div>
+</div>
+<div class="absolute -bottom-6 -left-6 hidden @[480px]:block rounded-2xl bg-white p-4 shadow-xl dark:bg-slate-800">
+<div class="flex items-center gap-3">
+<div class="rounded-full bg-green-100 p-2 text-green-600">
+<span class="material-symbols-outlined">verified</span>
+</div>
+<div>
+<p class="text-xs font-bold text-slate-500">Verified Notes</p>
+<p class="text-sm font-black">CS101: Data Structures</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="bg-white py-20 dark:bg-background-dark/50">
+<div class="container mx-auto px-4">
+<div class="mb-16 flex flex-col gap-4 text-center">
+<h2 class="text-3xl font-black tracking-tight @[480px]:text-4xl">Why Tungsten Learn?</h2>
+<p class="mx-auto max-w-2xl text-slate-600 dark:text-slate-400">
+                        Designed by students, for students, to enhance academic performance through collaborative learning.
+                    </p>
+</div>
+<div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+<div class="flex flex-col gap-4 rounded-2xl border border-slate-200 p-8 transition-all hover:border-primary/50 hover:shadow-lg dark:border-slate-800">
+<div class="flex size-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-3xl">verified_user</span>
+</div>
+<h3 class="text-xl font-bold">Verified Notes</h3>
+<p class="leading-relaxed text-slate-600 dark:text-slate-400">
+                            High-quality notes from top-performing students in your specific courses, vetted for accuracy and clarity.
+                        </p>
+</div>
+<div class="flex flex-col gap-4 rounded-2xl border border-slate-200 p-8 transition-all hover:border-primary/50 hover:shadow-lg dark:border-slate-800">
+<div class="flex size-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-3xl">groups</span>
+</div>
+<h3 class="text-xl font-bold">Peer Support</h3>
+<p class="leading-relaxed text-slate-600 dark:text-slate-400">
+                            Get your questions answered by classmates who are studying the same material in real-time.
+                        </p>
+</div>
+<div class="flex flex-col gap-4 rounded-2xl border border-slate-200 p-8 transition-all hover:border-primary/50 hover:shadow-lg dark:border-slate-800">
+<div class="flex size-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-3xl">draw</span>
+</div>
+<h3 class="text-xl font-bold">Study Groups</h3>
+<p class="leading-relaxed text-slate-600 dark:text-slate-400">
+                            Organize and join virtual study sessions with integrated shared whiteboards and live document editing.
+                        </p>
+</div>
+</div>
+</div>
+</section>
+<section class="container mx-auto flex flex-col items-center px-4 py-24">
+<div class="w-full max-w-md overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-2xl dark:border-slate-800 dark:bg-slate-900">
+<div class="bg-primary p-8 text-center text-white">
+<h2 class="text-2xl font-bold">Welcome Back</h2>
+<p class="mt-2 opacity-80">Log in to your student dashboard</p>
+</div>
+<div class="p-8">
+<form class="flex flex-col gap-6">
+<div class="flex flex-col gap-2">
+<label class="text-sm font-bold text-slate-700 dark:text-slate-300">University Email Address</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">alternate_email</span>
+<input class="w-full rounded-xl border border-slate-200 bg-slate-50 py-3 pl-12 pr-4 transition-focus focus:border-primary focus:ring-2 focus:ring-primary/20 dark:border-slate-700 dark:bg-slate-800" placeholder="name@university.edu" required="" type="email"/>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<label class="text-sm font-bold text-slate-700 dark:text-slate-300">Password</label>
+<a class="text-xs font-bold text-primary hover:underline" href="#">Forgot?</a>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">lock</span>
+<input class="w-full rounded-xl border border-slate-200 bg-slate-50 py-3 pl-12 pr-4 transition-focus focus:border-primary focus:ring-2 focus:ring-primary/20 dark:border-slate-700 dark:bg-slate-800" placeholder="••••••••" required="" type="password"/>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<input class="rounded border-slate-300 text-primary focus:ring-primary" id="remember" type="checkbox"/>
+<label class="text-sm text-slate-600 dark:text-slate-400" for="remember">Keep me logged in</label>
+</div>
+<button class="mt-2 w-full rounded-xl bg-primary py-4 text-center font-bold text-white transition-opacity hover:opacity-90 active:scale-[0.98]" type="submit">
+                            Sign In
+                        </button>
+</form>
+<div class="mt-8 flex flex-col items-center gap-4 text-center">
+<p class="text-sm text-slate-500">Don't have an account yet?</p>
+<button class="text-sm font-bold text-primary hover:underline">Create an institutional account</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="border-t border-slate-200 bg-slate-50 py-12 dark:border-slate-800 dark:bg-background-dark">
+<div class="container mx-auto px-4">
+<div class="flex flex-col items-center justify-between gap-8 md:flex-row">
+<div class="flex items-center gap-2">
+<div class="flex size-8 items-center justify-center rounded bg-primary text-white">
+<span class="material-symbols-outlined text-xl">school</span>
+</div>
+<span class="text-lg font-bold tracking-tight">Tungsten Learn</span>
+</div>
+<div class="flex gap-8 text-sm text-slate-500">
+<a class="hover:text-primary" href="#">Privacy Policy</a>
+<a class="hover:text-primary" href="#">Terms of Service</a>
+<a class="hover:text-primary" href="#">Accessibility</a>
+</div>
+<p class="text-sm text-slate-400">© 2024 Tungsten Learn. For Academic Purposes Only.</p>
+</div>
+</div>
+</footer>
+</body></html>

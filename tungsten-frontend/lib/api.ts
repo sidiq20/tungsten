@@ -9,6 +9,7 @@ import type {
   PostResponse,
   CourseResponse,
   CourseCreate,
+  CourseUpdate,
   TagResponse,
   VoteResponse,
   SearchResponse,

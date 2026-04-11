@@ -104,6 +104,13 @@ export interface PaginatedCourseResponse {
   items: CourseResponse[];
 }
 
+export interface CourseUpdate {
+  code?: string;
+  name?: string;
+  description?: string;
+  department?: string;
+}
+
 export interface VoteResponse {
   target_id: string;
   upvotes: number;

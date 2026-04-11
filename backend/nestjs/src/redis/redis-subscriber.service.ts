@@ -42,14 +42,34 @@ export class RedisSubscriberService implements OnModuleInit, OnModuleDestroy {
     }
 
     // Dedicated subscriber connection — separate from the Bull queue connection
-    this.subscriber = createClient({ url: redisUrl }) as RedisClientType;
+    this.subscriber = createClient({
+      url: redisUrl,
+      socket: {
+        reconnectStrategy: (retries) => {
+          if (retries > 10) {
+            this.logger.error('Redis connection failed after 10 attempts. Giving up.');
+            return false; // Stop retrying
+          }
+          return Math.min(retries * 100, 3000); // Backoff
+        }
+      }
+    }) as RedisClientType;
 
     this.subscriber.on('error', (err) => {
-      this.logger.error(`Redis subscriber error: ${err.message}`);
+      // Avoid excessive log noise if it's the same connection error
+      if (err.message.includes('EACCES') || err.message.includes('ENOTFOUND')) {
+        this.logger.warn(`Redis connection unavailable: ${err.message}. Real-time features (WS/Analytics) may not work.`);
+      } else {
+        this.logger.error(`Redis subscriber error: ${err.message}`);
+      }
     });
 
-    await this.subscriber.connect();
-    this.logger.log('Redis Pub/Sub subscriber connected');
+    try {
+      await this.subscriber.connect();
+      this.logger.log('Redis Pub/Sub subscriber connected');
+    } catch (err) {
+      this.logger.error(`Initial Redis connection failed: ${err.message}. Features depending on Redis Pub/Sub will be disabled.`);
+    }
 
     // ── Channels published by FastAPI ────────────────────────────────────────
 

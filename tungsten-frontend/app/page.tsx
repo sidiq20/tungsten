@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import {
@@ -46,7 +46,7 @@ function PostSkeleton() {
   );
 }
 
-export default function FeedPage() {
+function FeedContent() {
   const { user } = useAuth();
   const searchParams = useSearchParams();
   const tagFilter = searchParams.get('tag') || '';
@@ -419,6 +419,14 @@ export default function FeedPage() {
         @keyframes spin { to { transform: rotate(360deg); } }
       `}</style>
     </div>
+  );
+}
+
+export default function FeedPage() {
+  return (
+    <Suspense fallback={<div style={{ padding: '2rem' }}><PostSkeleton /></div>}>
+      <FeedContent />
+    </Suspense>
   );
 }
 

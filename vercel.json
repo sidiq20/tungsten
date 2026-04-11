@@ -1,0 +1,5 @@
+{
+  "buildCommand": "cd tungsten-frontend && npm install && npm run build",
+  "outputDirectory": "tungsten-frontend/.next",
+  "framework": "nextjs"
+}

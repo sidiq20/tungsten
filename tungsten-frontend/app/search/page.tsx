@@ -1,6 +1,6 @@
 'use client';
 
-import { use, useState, useEffect } from 'react';
+import { use, useState, useEffect, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { Search as SearchIcon, BookOpen, FileText, ChevronRight } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
@@ -9,7 +9,7 @@ import { CourseCard } from '@/components/CourseCard';
 import { searchApi } from '@/lib/api';
 import type { PostResponse, CourseResponse } from '@/lib/types';
 
-export default function SearchPage() {
+function SearchContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const query = searchParams.get('q') || '';
@@ -135,5 +135,13 @@ export default function SearchPage() {
         )}
       </main>
     </div>
+  );
+}
+
+export default function SearchPage() {
+  return (
+    <Suspense fallback={<div className="container-page" style={{ paddingTop: '3rem' }}>Loading Search...</div>}>
+      <SearchContent />
+    </Suspense>
   );
 }
